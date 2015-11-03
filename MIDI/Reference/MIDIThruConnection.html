@@ -1,0 +1,523 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN
+	"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html lang="en">
+<head>
+	<META http-equiv="content-type" CONTENT="text/html;charset=iso-8859-1">
+	<title>?Reference/MIDIThruConnection?</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+<a name="CoreMIDI/MIDIThruConnection.h"></a>
+<h1>CoreMIDI / MIDIThruConnection.h</h1><p>This header defines functions to create MIDI play-through connections
+between the MIDI sources and destinations.  These connections may be
+persistent or transitory, owned by a client.</p><p>By using connections instead of doing MIDI Thru operations themselves,
+the overhead of moving MIDI messages between the server and the client
+for thru-ing is reduced.</p><p>The aim of these functions is to permit as flexible a set of transformations 
+as possible while keeping the API and data structures relatively simple.</p><p>All of the functions in this header are new for CoreMIDI 1.3.</p>
+<hr>
+
+	<table border="0" cellpadding="0" cellspacing="4">
+<tr><td colspan="3"><b>Functions</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionParamsInitialize">MIDIThruConnectionParamsInitialize</a></td>
+<td>
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionCreate">MIDIThruConnectionCreate</a></td>
+<td>
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionDispose">MIDIThruConnectionDispose</a></td>
+<td>
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionGetParams">MIDIThruConnectionGetParams</a></td>
+<td>
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionSetParams">MIDIThruConnectionSetParams</a></td>
+<td>
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionFind">MIDIThruConnectionFind</a></td>
+<td>
+	</td>
+</tr>
+<tr><td colspan="3"><b>Defined Types</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionRef">MIDIThruConnectionRef</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDIValueMap">MIDIValueMap</a></td></tr>
+<tr><td colspan="3"><b>Structs</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDITransform">MIDITransform</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDIControlTransform">MIDIControlTransform</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionEndpoint">MIDIThruConnectionEndpoint</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionParams">MIDIThruConnectionParams</a></td></tr>
+<tr><td colspan="3"><b>Enumerations</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#MIDImessagestransformations">MIDI messages transformations</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIThruConnection.html#kMIDIControlType_7Bit">kMIDIControlType_7Bit</a></td></tr>
+</table>
+
+
+<hr>
+
+<a name="//apple_ref/c/tdef/MIDIThruConnectionRef"></a>
+<h3><a name="MIDIThruConnectionRef">MIDIThruConnectionRef</a></h3>
+
+		<pre>typedef struct OpaqueMIDIThruConnection *<b>MIDIThruConnectionRef</b>;</pre>
+	
+		An opaque reference to a play-through connection.
+	<hr>
+
+<a name="//apple_ref/c/tdef/MIDIValueMap"></a>
+<h3><a name="MIDIValueMap">MIDIValueMap</a></h3>
+
+		<pre>struct MIDIValueMap {
+  UInt8  value[128];
+};</pre>
+	
+		A custom mapping function to transform MIDI 7-bit values, as contained
+		in note numbers, velocities, control values, etc.  y = value[x], where
+		x is the input MIDI value, y the output.
+	<hr>
+
+<a name="//apple_ref/c/tag/MIDI messages transformations"></a>
+<h3><a name="MIDImessagestransformations">MIDI messages transformations</a></h3>
+
+		<pre>enum {
+  kMIDITransform_None        = 0,
+  kMIDITransform_FilterOut   = 1,
+  kMIDITransform_MapControl  = 2,
+  kMIDITransform_Add         = 8,
+  kMIDITransform_Scale       = 9,
+  kMIDITransform_MinValue    = 10,
+  kMIDITransform_MaxValue    = 11,
+  kMIDITransform_MapValue    = 12
+};</pre>
+	
+		The constants define various transformations to be applied to MIDI events.
+	<h4>Constants</h4>
+<dl>
+<dt><a name="//apple_ref/c/econst/kMIDITransform_None"><tt>kMIDITransform_None</tt></a></dt>
+<dd>
+			No transformation is applied.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDITransform_FilterOut"><tt>kMIDITransform_FilterOut</tt></a></dt>
+<dd>
+			All events of the type are filtered out.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDITransform_MapControl"><tt>kMIDITransform_MapControl</tt></a></dt>
+<dd>
+			One MIDI control number is remapped to another.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDITransform_Add"><tt>kMIDITransform_Add</tt></a></dt>
+<dd>
+			A constant value is added to one of the event's data bytes.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDITransform_Scale"><tt>kMIDITransform_Scale</tt></a></dt>
+<dd>
+			One of the event's data bytes is multiplied by a constant.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDITransform_MinValue"><tt>kMIDITransform_MinValue</tt></a></dt>
+<dd>
+			A minimum limit is applied to one of the event's data bytes.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDITransform_MaxValue"><tt>kMIDITransform_MaxValue</tt></a></dt>
+<dd>
+			A maximum limit is applied to one of the event's data bytes.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDITransform_MapValue"><tt>kMIDITransform_MapValue</tt></a></dt>
+<dd>
+			One of the event's data bytes is mapped through a <a href="../Reference/MIDIThruConnection.html#MIDIValueMap"><tt>MIDIValueMap</tt></a>.
+		</dd>
+</dl><hr>
+
+<a name="//apple_ref/c/tag/kMIDIControlType_7Bit"></a>
+<h3><a name="kMIDIControlType_7Bit">kMIDIControlType_7Bit</a></h3>
+
+		<pre>enum {
+  kMIDIControlType_7Bit       = 0,
+  kMIDIControlType_14Bit      = 1,
+  kMIDIControlType_7BitRPN    = 2,
+  kMIDIControlType_14BitRPN   = 3,
+  kMIDIControlType_7BitNRPN   = 4,
+  kMIDIControlType_14BitNRPN  = 5
+};</pre>
+	
+		
+	<h4>Constants</h4>
+<dl>
+<dt><a name="//apple_ref/c/econst/kMIDIControlType_7Bit"><tt>kMIDIControlType_7Bit</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIControlType_14Bit"><tt>kMIDIControlType_14Bit</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIControlType_7BitRPN"><tt>kMIDIControlType_7BitRPN</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIControlType_14BitRPN"><tt>kMIDIControlType_14BitRPN</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIControlType_7BitNRPN"><tt>kMIDIControlType_7BitNRPN</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIControlType_14BitNRPN"><tt>kMIDIControlType_14BitNRPN</tt></a></dt>
+<dd>
+				
+		</dd>
+</dl><hr>
+
+<a name="//apple_ref/c/func/MIDIThruConnectionParamsInitialize"></a>
+<h3><a name="MIDIThruConnectionParamsInitialize">MIDIThruConnectionParamsInitialize</a></h3>
+
+	
+		<pre>void <b>MIDIThruConnectionParamsInitialize</b>(
+  <a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionParams">MIDIThruConnectionParams</a> *  inConnectionParams
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>inConnectionParams</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+<hr>
+
+<a name="//apple_ref/c/func/MIDIThruConnectionCreate"></a>
+<h3><a name="MIDIThruConnectionCreate">MIDIThruConnectionCreate</a></h3>
+
+	
+		<pre>OSStatus <b>MIDIThruConnectionCreate</b>(
+  CFStringRef              inPersistentOwnerID,
+  CFDataRef                inConnectionParams,
+  <a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionRef">MIDIThruConnectionRef</a> *  outConnection
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>inPersistentOwnerID</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>inConnectionParams</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>outConnection</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+<b>Result:</b> 
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIThruConnectionDispose"></a>
+<h3><a name="MIDIThruConnectionDispose">MIDIThruConnectionDispose</a></h3>
+
+	
+		<pre>OSStatus <b>MIDIThruConnectionDispose</b>(
+  <a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionRef">MIDIThruConnectionRef</a>  connection
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>connection</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+<b>Result:</b> 
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIThruConnectionGetParams"></a>
+<h3><a name="MIDIThruConnectionGetParams">MIDIThruConnectionGetParams</a></h3>
+
+	
+		<pre>OSStatus <b>MIDIThruConnectionGetParams</b>(
+  <a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionRef">MIDIThruConnectionRef</a>  connection,
+  CFDataRef *            outConnectionParams
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>connection</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>outConnectionParams</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+<b>Result:</b> 
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIThruConnectionSetParams"></a>
+<h3><a name="MIDIThruConnectionSetParams">MIDIThruConnectionSetParams</a></h3>
+
+	
+		<pre>OSStatus <b>MIDIThruConnectionSetParams</b>(
+  <a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionRef">MIDIThruConnectionRef</a>  connection,
+  CFDataRef              inConnectionParams
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>connection</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>inConnectionParams</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+<b>Result:</b> 
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIThruConnectionFind"></a>
+<h3><a name="MIDIThruConnectionFind">MIDIThruConnectionFind</a></h3>
+
+	
+		<pre>OSStatus <b>MIDIThruConnectionFind</b>(
+  CFStringRef  inPersistentOwnerID,
+  CFDataRef *  outConnectionList
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>inPersistentOwnerID</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>outConnectionList</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+<b>Result:</b> 
+	<hr>
+
+<a name="//apple_ref/c/tag/MIDITransform"></a>
+<h3><a name="MIDITransform">MIDITransform</a></h3>
+
+		<pre>struct MIDITransform {
+  UInt16  transform;
+  SInt16  param;
+};</pre>
+	
+		
+	<h4>Fields</h4>
+<dl>
+<dt><tt>transform</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>param</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+
+<hr>
+
+<a name="//apple_ref/c/tag/MIDIControlTransform"></a>
+<h3><a name="MIDIControlTransform">MIDIControlTransform</a></h3>
+
+		<pre>struct MIDIControlTransform {
+  UInt8   controlType;
+  UInt8   remappedControlType;
+  UInt16  controlNumber;
+  UInt16  transform;
+  SInt16  param;
+};</pre>
+	
+		
+	<h4>Fields</h4>
+<dl>
+<dt><tt>controlType</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>remappedControlType</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>controlNumber</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>transform</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>param</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+
+<hr>
+
+<a name="//apple_ref/c/tag/MIDIThruConnectionEndpoint"></a>
+<h3><a name="MIDIThruConnectionEndpoint">MIDIThruConnectionEndpoint</a></h3>
+
+		<pre>struct MIDIThruConnectionEndpoint {
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a>  endpointRef;
+  <a href="../Reference/MIDIServices.html#MIDIUniqueID">MIDIUniqueID</a>     uniqueID;
+};</pre>
+	
+		
+	<h4>Fields</h4>
+<dl>
+<dt><tt>endpointRef</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>uniqueID</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+
+<hr>
+
+<a name="//apple_ref/c/tag/MIDIThruConnectionParams"></a>
+<h3><a name="MIDIThruConnectionParams">MIDIThruConnectionParams</a></h3>
+
+		<pre>struct MIDIThruConnectionParams {
+  UInt32                      version;
+  UInt32                      numSources;
+  <a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionEndpoint">MIDIThruConnectionEndpoint</a>  sources[kMIDIThruConnection_MaxEndpoints];
+  UInt32                      numDestinations;
+  <a href="../Reference/MIDIThruConnection.html#MIDIThruConnectionEndpoint">MIDIThruConnectionEndpoint</a>  destinations[kMIDIThruConnection_MaxEndpoints];
+  UInt8                       channelMap[16];
+  UInt8                       reserved1[2];
+  UInt8                       lowNote;
+  UInt8                       highNote;
+  <a href="../Reference/MIDIThruConnection.html#MIDITransform">MIDITransform</a>               noteNumber;
+  <a href="../Reference/MIDIThruConnection.html#MIDITransform">MIDITransform</a>               velocity;
+  <a href="../Reference/MIDIThruConnection.html#MIDITransform">MIDITransform</a>               keyPressure;
+  <a href="../Reference/MIDIThruConnection.html#MIDITransform">MIDITransform</a>               channelPressure;
+  <a href="../Reference/MIDIThruConnection.html#MIDITransform">MIDITransform</a>               programChange;
+  <a href="../Reference/MIDIThruConnection.html#MIDITransform">MIDITransform</a>               pitchBend;
+  UInt8                       filterOutSysEx;
+  UInt8                       filterOutMTC;
+  UInt8                       filterOutBeatClock;
+  UInt8                       filterOutTuneRequest;
+  UInt8                       reserved2[3];
+  UInt8                       filterOutAllControls;
+  UInt16                      numControlTransforms;
+  UInt16                      numMaps;
+  UInt16                      reserved3[4];
+};</pre>
+	
+		
+	<h4>Fields</h4>
+<dl>
+<dt><tt>version</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>numSources</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>sources</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>numDestinations</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>destinations</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>channelMap</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>reserved1</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>lowNote</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>highNote</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>noteNumber</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>velocity</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>keyPressure</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>channelPressure</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>programChange</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>pitchBend</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>filterOutSysEx</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>filterOutMTC</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>filterOutBeatClock</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>filterOutTuneRequest</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>reserved2</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>filterOutAllControls</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>numControlTransforms</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>numMaps</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>reserved3</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+
+<hr>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN
+	"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html lang="en">
+<head>
+	<META http-equiv="content-type" CONTENT="text/html;charset=iso-8859-1">
+	<title>?midi_overview?</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+<a name="CoreMIDIIntroduction"></a>
+<h1>Core MIDI Introduction</h1>
+<hr>
+
+	<table border="0" cellpadding="0" cellspacing="4">
+<tr><td colspan="2"><b>Contents</b></td></tr>
+<tr><td width="32">&nbsp;</td><td colspan="1"><a href="midi_overview.html#History">History</a></td></tr>
+<tr><td width="32">&nbsp;</td><td colspan="1"><a href="midi_overview.html#APIOverview">API Overview</a></td></tr>
+<tr><td width="32">&nbsp;</td><td colspan="1"><a href="midi_overview.html#Persistentconfigurations/DeviceInformation">Persistent configurations / Device Information</a></td></tr>
+<tr><td width="32">&nbsp;</td><td colspan="1"><a href="midi_overview.html#Implementationoverview">Implementation overview</a></td></tr>
+<tr><td width="32">&nbsp;</td><td colspan="1"><a href="midi_overview.html#NoteaboutCoreFoundationdatatypes(CFString,CFData,CFDictionary)">Note about CoreFoundation data types (CFString, CFData, CFDictionary)</a></td></tr>
+<tr><td width="32">&nbsp;</td><td colspan="1"><a href="midi_overview.html#VersionHistory">Version History</a></td></tr>
+</table>
+
+
+<hr>
+
+<a name="History"></a>
+<h2>History</h2><p>Apple's MIDI Manager (ca. 1990) had a simple model of the world.  There were
+application and driver clients, which had MIDI in/out ports, which could be
+interconnected in arbitrary ways.  This model failed to provide a way for
+applications to make reasonable assumptions about how to make bi-directional
+connections to a MIDI device.  MIDI Manager also had limitations on the
+number of ports per client, and became very unwieldy with the advent of
+large studios and multi-port MIDI interfaces such as the MIDI Time Piece and
+Studio 5.</p><p>Opcode's OMS (1991) addressed some of the shortcomings of MIDI Manager. 
+There was the concept of a studio setup document, where drivers detected
+their devices, and the user could define the characteristics of additional
+devices connected to the MIDI ports. Applications could view the studio both
+as a collection of MIDI source and destination "nodes", but also as a
+collection of devices.  OMS collected information about, and made available
+to its clients, useful characteristics of the devices in the studio, such as
+their system-exclusive IDs, MIDI channels on which they were listening,
+which were controllers (as opposed to simple tone generators), etc.</p><a name="APIOverview"></a>
+<h2>API Overview</h2><p>This design expands slightly on OMS's device/node hierarchy, inspired by the
+USB MIDI spec.</p><p>Drivers own and control devices, e.g. USB interfaces, PCI cards, etc.  A
+device is defined as a physical object that would be represented by a single
+icon if there were a graphical view of the studio.</p><p>Devices may have multiple logically distinct sub-components, e.g. a MIDI
+synthesizer and a pair of MIDI ports, both addressable via a USB port. 
+These are called Entities.</p><p>Entities have any number of Endpoints, sources and destinations of
+16-channel MIDI streams.  By grouping a device's endpoints into entities,
+the system has enough information for an application to make reasonable
+assumptions about how to communicate in a bi-directional manner with each
+entity, as is necessary in MIDI librarian applications.</p><p>Drivers add standard properties to the devices/entities/endpoints they
+create, and may also set additional private properties on them for their
+own use.</p><p>Using the Audio MIDI Setup application, users may define "external" devices,
+devices which are connected to a driver-owned device (such as a MIDI interface)
+via a traditional MIDI cable.  Users may then define the properties of these
+external devices using CoreMIDI's central database of the current state.</p><p>It's worth noting that some device characteristics are dynamic
+(e.g. MIDI receive channel and system-exclusive ID's), or a matter of user
+preference (choice of icon, whether the device should appear in lists of
+possible controllers), while other properties are static and could be looked
+up in a database, using the device's manufacturer and model names as a key.</p><a name="Persistentconfigurations/DeviceInformation"></a>
+<h2>Persistent configurations / Device Information</h2><p>There are a number of reasons why CoreMIDI has a persistent state.</p><p>Endpoints must have persistent ID's.  When a user assigns events in a
+sequencing application to an endpoint, the application needs a way to retain
+a permanent reference to the selected endpoint.  A brute-force method of
+generating a persistent ID would be to combine the driver name, device name,
+entity name, and endpoint type and index into a string, but this is not very
+friendly to clients even if the system provides services to generate and
+decode these strings.</p><p>Consider a USB MIDI interface driver, in the case where there are two
+instances of one model of interface present.  The driver needs a way to
+permanently distinguish, to the system and its clients, between the two
+interfaces.  Which is #1 and which is #2? If #1 gets unplugged, #2 should
+not automatically become #1; the user's documents may be referring to
+devices which were attached to #2.</p><p>These needs for persistent configuration information provide a rationale for
+having something akin to OMS's studio setup document, a saved configuration
+for the system. Mobile users who work in multiple environments could select
+between multiple saved configurations in a Location Manager-compatible
+manner.</p><p>Given services with which to store driver configuration information, we then
+have built the groundwork for a client studio setup editor application. 
+Such an application can define external MIDI devices (not to
+be confused with the driver-owned cards/ interfaces/etc whose presence in
+the configuration is determined by the driver).</p><p>Moreover, since a driver knows exactly what device it is communicating with,
+it is capable of supplying information to the system about the
+characteristics of the device, such as its system-exclusive ID, whether it
+is General MIDI or DLS-compatible, etc.</p><p>But unlike OMS, the system is able to begin functioning immediately,
+using only the MIDI devices/endpoints detected by the drivers, without
+forcing the user to go through a somewhat lengthy and confusing intial
+configuration process. Definition of external MIDI devices can be a
+completely optional step, only made possible when a client application
+requests that they be added to the configuration.</p><a name="Implementationoverview"></a>
+<h2>Implementation overview</h2><p>The client API is implemented as the CoreMIDI framework, which uses IPC to
+communicate with a server process, MIDIServer.</p><p>The server process loads, and manages all communication with, MIDI drivers.
+Most of its implementation is in the CoreMIDIServer framework, which drivers 
+may link against in order to access the API.</p><p>"Drivers" are not I/O Kit drivers.  They are dynamic libraries, packaged as
+CFPlugins.</p><p>Many MIDI drivers can simply be user-side I/O Kit clients (probably for
+serial, USB, Firewire).</p><p>PCI card drivers will need their MIDI drivers to communicate with a separate
+kernel extension.</p><a name="NoteaboutCoreFoundationdatatypes(CFString,CFData,CFDictionary)"></a>
+<h2>Note about CoreFoundation data types (CFString, CFData, CFDictionary)</h2><p>When passing a CF object to a MIDI function, the MIDI function will never
+consume a reference to the object; the caller always retains a reference
+which it is responsible for releasing with CFRelease().</p><p>When receiving a CF object as a return value from a MIDI function, the caller
+always receives a new reference to the object, and is responsible for
+releasing it.</p><a name="VersionHistory"></a>
+<h2>Version History</h2><p>CoreMIDI 1.0 shipped with Mac OS X 10.0.</p><p>CoreMIDI 1.1 shipped with Mac OS X 10.1.</p><p>CoreMIDI 1.3 shipped with Mac OS X 10.2.</p></body>
+</html>

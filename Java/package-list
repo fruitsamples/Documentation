@@ -1,0 +1,8 @@
+com.apple.audio
+com.apple.audio.hardware
+com.apple.audio.jdirect
+com.apple.audio.midi
+com.apple.audio.toolbox
+com.apple.audio.units
+com.apple.audio.util
+com.apple.component

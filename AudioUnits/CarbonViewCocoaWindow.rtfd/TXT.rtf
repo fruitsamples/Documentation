@@ -1,0 +1,116 @@
+{\rtf1\mac\ansicpg10000\cocoartf102
+{\fonttbl\f0\fswiss\fcharset77 Helvetica-Bold;\f1\fswiss\fcharset77 Helvetica;\f2\fswiss\fcharset77 Helvetica-Oblique;
+}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww16640\viewh14020\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\f0\b\fs24 \cf0 Embedding a Carbon View in a Cocoa Window\
+\
+Introduction:
+\f1\b0 \
+Now that Audio Units support both Cocoa and Carbon custom views, Audio Unit host applications face the burden of having to support both kinds of views in order to provide a complete user experience.  Using Cocoa's parent-child window relationships (WindowGroups in Carbon) creatively, we can provide the illusion of supporting a carbon view in a cocoa window, or of supporting a cocoa view in a carbon window.  This document details the implementation of carbon view support in a cocoa inspector window.\
+\
+
+\f0\b Process:
+\f1\b0 \
+This hybrid view embedding illusion is accomplished with use of Cocoa's NSWindow API set and Carbon's WindowManager.  There is a good deal of crossover between the two (i.e., the WindowManager can be used to manipulate Cocoa windows to some degree, and the NSWindow API can be used to manipulate Carbon windows to some degree.)  If your hosting application is written with Carbon APIs, feel free to lean more heavily on the WindowManager equivalents of the Cocoa calls indicated.\
+\
+The Cocoa window hosting the Carbon view looks like the following:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+\cf0 {{\NeXTGraphic Figure1.png \width13360 \height7060
+}¬}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\f1\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
+\cf0 <figure 1>\
+\
+\
+The Carbon view is contained in a shadowless, plain Carbon window that is exactly the size of the Carbon view it contains.  Its window is linked to the owning Cocoa window.  Figure 2 shows how the windows are stacked visually:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+\cf0 {{\NeXTGraphic Figure2.png \width9560 \height10140
+}¬}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\f1\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
+\cf0 <figure 2> window exploded view\
+\
+Note that the Cocoa Window contains a navigation toolbar and a drawer.\
+\
+After having created your Cocoa and Carbon windows:\
+\
+	NSWindow *owningCocoaWindow;\
+	WindowRef ownedCarbonWindow;\
+\
+First, position the Carbon window so that it is aligned with the Cocoa window the way you want using\
+	void MoveWindow (short x, short y);\
+	void SizeWindow (short width, short height);\
+\
+Second, wrap your Carbon window in Cocoa:\
+\
+	NSWindow *wrappedCarbonWindow = [[NSWindow alloc] initWithWindowRef:ownedCarbonWindow];\
+\
+Third, establish the parent-child relationship:\
+\
+	[owningCocoaWindow addChildWindow:wrappedCarbonWindow ordered:NSWindowAbove];\
+\
+This will "lock" the child window to the parent window.  Moving the parent window will move the child window as if they are the same entity.  A word of caution: in this state child windows can be moved independently of the parent.  Consequently, using textured windows, or windows with titlebars can present UI difficulties.\
+\
+That's it: you're linked.\
+\
+When you want to remove the Carbon view, first end the parent-child relationship:\
+\
+	[owningCocoaWindow removeChildWindow:wrappedCarbonWindow];\
+\
+And then close or hide the window, relinquishing resources as normal.\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
+
+\f0\b \cf0 Caveats:
+\f1\b0 \
+Clicking on the child window will activate it, and bring it to the front, without including its parent.\
+That raises two UI concerns:\
+\
+\ul Window Slicing:\ulnone \
+Depending on the order the user clicks on windows on her desktop, there are cases where a 3rd window can get positioned (in z-dimension) between the parent and child windows.  While not fatal, this is certainly irritating.  In this example case, our owning Cocoa window is an inspector panel.  We've avoided the problem entirely by making the panel floating, and so it's always above all other windows on screen.\
+\
+\ul Disjoint Activation:\ulnone \
+Except in the case of non-activating panels, only one window can be active in an application at a given time.  This looks odd because clicking on the owning Cocoa window will deactive UI in the Carbon window, and clicking on the Carbon window will deactivate the UI in its owning Cocoa window.  We have avoided part of the problem by making our panel non-activating.  While we never lose activation in the toolbar, we do lose the activated state in the Carbon window.  This is still being investigated.\
+\
+
+\f0\b \
+Links:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
+
+\f1\b0 \cf0 Cocoa NSWindow APIs:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+{\field{\*\fldinst{HYPERLINK "http://developer.apple.com/documentation/Cocoa/Reference/ApplicationKit/ObjC_classic/Classes/NSWindow.html"}}{\fldrslt \cf0 http://developer.apple.com/documentation/Cocoa/Reference/ApplicationKit/ObjC_classic/Classes/NSWindow.html}}\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
+\cf0 \
+Carbon WindowManager APIs:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+{\field{\*\fldinst{HYPERLINK "http://developer.apple.com/documentation/Carbon/Reference/Window_Manager/index.html"}}{\fldrslt \cf0 http://developer.apple.com/documentation/Carbon/Reference/Window_Manager/index.html}}
+\f0\b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
+
+\f1\b0 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+\cf0 Cocoa in Carbon Sample Code:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+{\field{\*\fldinst{HYPERLINK "http://developer.apple.com/samplecode/Sample_Code/Cocoa/CocoaInCarbon.htm"}}{\fldrslt \cf0 http://developer.apple.com/samplecode/Sample_Code/Cocoa/CocoaInCarbon.htm}}\
+\
+Carbon in Cocoa:\
+{\field{\*\fldinst{HYPERLINK "http://developer.apple.com/documentation/Cocoa/Conceptual/CarbonCocoaDoc/cci_chap1/chapter_1_section_1.html"}}{\fldrslt http://developer.apple.com/documentation/Cocoa/Conceptual/CarbonCocoaDoc/cci_chap1/chapter_1_section_1.html}}\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
+\cf0 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
+
+\f2\i \cf0 < end of document; last modified 4 Dec, 2003 >\
+}

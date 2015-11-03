@@ -1,0 +1,552 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN
+	"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html lang="en">
+<head>
+	<META http-equiv="content-type" CONTENT="text/html;charset=iso-8859-1">
+	<title>?Reference/MIDIDriver?</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+<a name="CoreMIDIServer/MIDIDriver.h"></a>
+<h1>CoreMIDIServer / MIDIDriver.h</h1><p>This is the header file for Mac OS X's MIDI driver interface.</p>
+<hr>
+
+	<table border="0" cellpadding="0" cellspacing="4">
+<tr><td colspan="2"><b>Contents</b></td></tr>
+<tr><td width="32">&nbsp;</td><td colspan="1"><a href="../Reference/MIDIDriver.html#AboutMIDIdrivers">About MIDI drivers</a></td></tr>
+<tr><td width="32">&nbsp;</td><td colspan="1"><a href="../Reference/MIDIDriver.html#Driverbundle/plug-inproperties">Driver bundle/plug-in properties</a></td></tr>
+<tr><td width="32">&nbsp;</td><td colspan="1"><a href="../Reference/MIDIDriver.html#DriveraccesstotheCoreMIDIAPI">Driver access to the CoreMIDI API</a></td></tr>
+</table>
+
+
+	<table border="0" cellpadding="0" cellspacing="4">
+<tr><td colspan="3"><b>Functions</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIDeviceCreate">MIDIDeviceCreate</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIDeviceListGetNumberOfDevices">MIDIDeviceListGetNumberOfDevices</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIDeviceListGetDevice">MIDIDeviceListGetDevice</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIDeviceListAddDevice">MIDIDeviceListAddDevice</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIDeviceListDispose">MIDIDeviceListDispose</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIEndpointSetRefCons">MIDIEndpointSetRefCons</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIEndpointGetRefCons">MIDIEndpointGetRefCons</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIGetDriverIORunLoop">MIDIGetDriverIORunLoop</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIGetDriverDeviceList">MIDIGetDriverDeviceList</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIDriverEnableMonitoring">MIDIDriverEnableMonitoring</a></td></tr>
+<tr><td colspan="3"><b>Defined Types</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIDeviceListRef">MIDIDeviceListRef</a></td></tr>
+<tr><td colspan="3"><b>Structs</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#MIDIDriverInterface">MIDIDriverInterface</a></td></tr>
+<tr><td colspan="3"><b>Constants</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#kMIDIDriverPropertyUsesSerial">kMIDIDriverPropertyUsesSerial</a></td></tr>
+<tr><td colspan="3"><b>Defines</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#kMIDIDriverTypeID">kMIDIDriverTypeID</a></td>
+<td>
+		The UUID for MIDI driver plugins.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#kMIDIDriverInterfaceID">kMIDIDriverInterfaceID</a></td>
+<td>
+		The UUID for version 1 of the MIDI driver interface.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIDriver.html#kMIDIDriverInterface2ID">kMIDIDriverInterface2ID</a></td>
+<td>
+		The UUID for version 2 of the MIDI driver interface.
+	</td>
+</tr>
+</table>
+
+
+<hr>
+
+<a name="AboutMIDIdrivers"></a>
+<h2>About MIDI drivers</h2><p>MIDI drivers are CFPlugIns, installed into the following places:</p><pre>
+/System/Library/Extensions      -- not recommended for non-Apple drivers, but
+                                   necessary for compatibility with CoreMIDI 1.0
+
+/Library/Audio/MIDI Drivers     -- starting with CoreMIDI 1.1
+
+~/Library/Audio/MIDI Drivers    -- starting with CoreMIDI 1.1
+</pre><p>Refer to the CFPlugIn documentation for more information about plug-ins.</p><a name="Driverbundle/plug-inproperties"></a>
+<h2>Driver bundle/plug-in properties</h2><p>A driver's bundle settings should include settings resembling the following:</p><pre>
+Bundle settings:
+	CFBundleIdentifier              String          com.mycompany.midi.driver.mydevice
+		(note that this will be the driver's persistent ID in MIDISetup's)
+	CFPlugInDynamicRegistration     String          NO
+	CFPlugInFactories               Dictionary      1 key/value pair
+		<your new factory UUID>     String          <your factory function name>
+	CFPlugInTypes                   Dictionary      1 key/value pair
+		ECDE9574-0FE4-11D4-BB1A-0050E4CEA526        Array       1 object
+			(this is <a href="../Reference/MIDIDriver.html#kMIDIDriverTypeID">kMIDIDriverTypeID</a>)
+			0                       String          <your new factory UUID>
+Build settings:
+	WRAPPER_EXTENSION               plugin
+</pre><a name="DriveraccesstotheCoreMIDIAPI"></a>
+<h2>Driver access to the CoreMIDI API</h2><p>Drivers have access to most of the CoreMIDI API.  They should link with
+CoreMIDIServer.framework, <b>not</b> CoreMIDI.framework.</p><p>Unlike applications, drivers communicate with the server directly, not 
+through Mach messaging.  This necessitates some limitations on the contexts from 
+which a driver may call the server.</p><p>The MIDI I/O functions <a href="../Reference/MIDIServices.html#MIDISend"><tt>MIDISend</tt></a> and <a href="../Reference/MIDIServices.html#MIDIReceived"><tt>MIDIReceived</tt></a> may be called from any thread.</p><p>All other CoreMIDI functions must only be called from the server's main thread,
+which is the thread on which the driver is created and from which all calls to it
+other than Send() are made.</p><hr></hr><a name="//apple_ref/c/tdef/MIDIDriverRef"></a>
+<h3><a name="MIDIDriverRef">MIDIDriverRef</a></h3>
+
+		<pre>typedef <a href="../Reference/MIDIDriver.html#MIDIDriverInterface">MIDIDriverInterface</a> **<b>MIDIDriverRef</b>;</pre>
+	
+		Points to a pointer to a <a href="../Reference/MIDIDriver.html#MIDIDriverInterface"><tt>MIDIDriverInterface</tt></a>, a CFPlugIn structure
+		(defined in MIDIDriver.h) containing function pointers for the driver's
+		methods.  Only the MIDIServer may call a driver's methods.
+	<hr>
+
+<a name="//apple_ref/c/tdef/MIDIDeviceListRef"></a>
+<h3><a name="MIDIDeviceListRef">MIDIDeviceListRef</a></h3>
+
+		<pre>typedef struct OpaqueMIDIDeviceList *<b>MIDIDeviceListRef</b>;</pre>
+	
+		A <tt>MIDIDeviceListRef</tt> is a list of <a href="../Reference/MIDIServices.html#MIDIDeviceRef"><tt>MIDIDeviceRef</tt></a>'s.  The devices are not
+		owned by the list (i.e., disposing the list does not dispose the
+		devices it references).
+	<hr>
+
+<h3><a name="kMIDIDriverTypeID">kMIDIDriverTypeID</a></h3>
+
+		<pre>
+#define kMIDIDriverTypeID  CFUUIDGetConstantUUIDWithBytes(NULL, 0xEC, 0xDE, 0x95, 0x74, 
+          0x0F, 0xE4, 0x11, 0xD4, 0xBB, 0x1A, 0x00, 0x50, 0xE4, 0xCE, 0xA5, 0x26)</pre>
+	
+		<tt>kMIDIDriverTypeID</tt> should be entered into your driver's bundle settings
+		as follows:
+					
+	<pre>
+	CFPlugInTypes                   Dictionary      1 key/value pair
+		ECDE9574-0FE4-11D4-BB1A-0050E4CEA526        Array       1 object
+			(this is kMIDIDriverTypeID)
+			0                       String          <your new factory UUID>
+	</pre>
+	<hr>
+
+<h3><a name="kMIDIDriverInterfaceID">kMIDIDriverInterfaceID</a></h3>
+
+		<pre>
+#define kMIDIDriverInterfaceID  CFUUIDGetConstantUUIDWithBytes(NULL, 0x49, 0xDF, 0xCA,
+          0x9E, 0x0F, 0xE5, 0x11, 0xD4, 0x95, 0x0D, 0x00, 0x50, 0xE4, 0xCE, 0xA5, 0x26)</pre>
+	
+		See the description of the <a href="../Reference/MIDIDriver.html#MIDIDriverInterface"><tt>MIDIDriverInterface</tt></a> structure for
+		information about different versions of the MIDI driver interface.
+	<hr>
+
+<h3><a name="kMIDIDriverInterface2ID">kMIDIDriverInterface2ID</a></h3>
+
+		<pre>
+#define kMIDIDriverInterface2ID  CFUUIDGetConstantUUIDWithBytes(NULL, 0x43, 0xC9, 0x8C, 
+          0x3C, 0x30, 0x6C, 0x11, 0xD5, 0xAF, 0x73, 0x00, 0x30, 0x65, 0xA8, 0x30, 0x1E)</pre>
+	
+		<p>See the description of the <a href="../Reference/MIDIDriver.html#MIDIDriverInterface"><tt>MIDIDriverInterface</tt></a> structure for
+		information about different versions of the MIDI driver interface.</p>
+
+		<p>The version 2 driver interface is available beginning with CoreMIDI
+		1.1.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIDriverPropertyUsesSerial"></a>
+<h3><a name="kMIDIDriverPropertyUsesSerial">kMIDIDriverPropertyUsesSerial</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIDriverPropertyUsesSerial</b>;</pre>
+	
+		<p>This constant, "MIDIDriverUsesSerial", when defined to "YES" in a
+		driver's bundle, tells MIDIServer that the driver uses serial ports and
+		is eligible to have serial ports assigned to it.</p>
+
+		<p>When a serial driver's Start() method is called, it should use
+		<a href="../Reference/MIDISetup.html#MIDIGetSerialPortOwner"><tt>MIDIGetSerialPortOwner</tt></a> to discover which serial ports it has been
+		assigned to use, and only use those ports.</p>
+
+		<p>New for CoreMIDI 1.1.</p>
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIDeviceCreate"></a>
+<h3><a name="MIDIDeviceCreate">MIDIDeviceCreate</a></h3>
+
+		<pre>OSStatus <b>MIDIDeviceCreate</b>(
+  <a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a>    owner,
+  CFStringRef      name,
+  CFStringRef      manufacturer,
+  CFStringRef      model,
+  <a href="../Reference/MIDIServices.html#MIDIDeviceRef">MIDIDeviceRef</a> *  outDevice
+);</pre>
+	
+		<p>Drivers call this function to create new MIDIDevice objects
+		corresponding to the hardware that is present.</p>
+
+		<p>Non-drivers may call this function as of CoreMIDI 1.1, to create
+		external devices.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>owner</tt></dt>
+<dd>
+						The driver creating the device.  NULL if a non-driver.
+		</dd>
+<dt><tt>name</tt></dt>
+<dd>
+						The name of the new device.
+		</dd>
+<dt><tt>manufacturer</tt></dt>
+<dd>
+						The name of the device's manufacturer.
+		</dd>
+<dt><tt>model</tt></dt>
+<dd>
+						The device's model name.
+		</dd>
+<dt><tt>outDevice</tt></dt>
+<dd>
+						On successful return, points to the newly-created device.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIDeviceListGetNumberOfDevices"></a>
+<h3><a name="MIDIDeviceListGetNumberOfDevices">MIDIDeviceListGetNumberOfDevices</a></h3>
+
+		<pre>ItemCount <b>MIDIDeviceListGetNumberOfDevices</b>(
+  <a href="../Reference/MIDIDriver.html#MIDIDeviceListRef">MIDIDeviceListRef</a>  devList
+);</pre>
+	
+		Returns the number of devices in a device list.
+	<h4>Parameters</h4>
+<dl><dt><tt>devList</tt></dt>
+<dd>
+						The device list.
+		</dd>
+</dl>
+<b>Result:</b> 
+		The number of devices in the list, or 0 if an error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIDeviceListGetDevice"></a>
+<h3><a name="MIDIDeviceListGetDevice">MIDIDeviceListGetDevice</a></h3>
+
+		<pre><a href="../Reference/MIDIServices.html#MIDIDeviceRef">MIDIDeviceRef</a> <b>MIDIDeviceListGetDevice</b>(
+  <a href="../Reference/MIDIDriver.html#MIDIDeviceListRef">MIDIDeviceListRef</a>  devList,
+  ItemCount          index0
+);</pre>
+	
+		Return one of the devices in a device list.
+	<h4>Parameters</h4>
+<dl><dt><tt>devList</tt></dt>
+<dd>
+						The device list.
+		</dd>
+<dt><tt>deviceIndex0</tt></dt>
+<dd>
+						The index (0...<a href="../Reference/MIDIDriver.html#MIDIDeviceListGetNumberOfDevices"><tt>MIDIDeviceListGetNumberOfDevices</tt></a>()-1) of the device
+						to return.
+		</dd>
+</dl>
+<b>Result:</b> 
+		A reference to a device, or NULL if an error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIDeviceListAddDevice"></a>
+<h3><a name="MIDIDeviceListAddDevice">MIDIDeviceListAddDevice</a></h3>
+
+		<pre>OSStatus <b>MIDIDeviceListAddDevice</b>(
+  <a href="../Reference/MIDIDriver.html#MIDIDeviceListRef">MIDIDeviceListRef</a>  devList,
+  <a href="../Reference/MIDIServices.html#MIDIDeviceRef">MIDIDeviceRef</a>      dev
+);</pre>
+	
+		Add a device to a device list.
+	<h4>Parameters</h4>
+<dl><dt><tt>devList</tt></dt>
+<dd>
+						The device list.
+		</dd>
+<dt><tt>dev</tt></dt>
+<dd>
+						The device to add to the list.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIDeviceListDispose"></a>
+<h3><a name="MIDIDeviceListDispose">MIDIDeviceListDispose</a></h3>
+
+		<pre>OSStatus <b>MIDIDeviceListDispose</b>(
+  <a href="../Reference/MIDIDriver.html#MIDIDeviceListRef">MIDIDeviceListRef</a>  devList
+);</pre>
+	
+		Dispose a device list, but not the contained devices.
+	
+					New for CoreMIDI 1.1.
+	<h4>Parameters</h4>
+<dl><dt><tt>devList</tt></dt>
+<dd>
+						The device list to be disposed.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIEndpointSetRefCons"></a>
+<h3><a name="MIDIEndpointSetRefCons">MIDIEndpointSetRefCons</a></h3>
+
+		<pre>OSStatus <b>MIDIEndpointSetRefCons</b>(
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a>  endpt,
+  void *           ref1,
+  void *           ref2
+);</pre>
+	
+		<p>Drivers need an efficient way to translate from a MIDIEndpoint (source
+		or destination) to their own internal data structures corresponding to
+		that endpoint.  This function provides a way for the driver to assign
+		its own refCons to endpoints.</p>
+
+		<p>These refCons are passed back to the driver in its Send() and Flush()
+		methods.</p>
+
+		<p>RefCons are not persistent (i.e. they are not saved as part of a
+		MIDISetup).  They need to be re-initialized in each call to Start().</p>
+
+		<p>A typical use is to use one refCon to refer to a device, and a second
+		to refer to a port on the device.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>endpt</tt></dt>
+<dd>
+						The endpoint whose refCons are to be set
+		</dd>
+<dt><tt>ref1</tt></dt>
+<dd>
+						The first refCon.
+		</dd>
+<dt><tt>ref2</tt></dt>
+<dd>
+						The second refCon.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIEndpointGetRefCons"></a>
+<h3><a name="MIDIEndpointGetRefCons">MIDIEndpointGetRefCons</a></h3>
+
+		<pre>OSStatus <b>MIDIEndpointGetRefCons</b>(
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a>  endpt,
+  void **          ref1,
+  void **          ref2
+);</pre>
+	
+		Obtain the refCons assigned to an endpoint.
+	<h4>Parameters</h4>
+<dl><dt><tt>endpt</tt></dt>
+<dd>
+						The endpoint whose refCons are to be return
+		</dd>
+<dt><tt>ref1</tt></dt>
+<dd>
+						On exit, the first refCon.
+		</dd>
+<dt><tt>ref2</tt></dt>
+<dd>
+						On exit, the second refCon.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIGetDriverIORunLoop"></a>
+<h3><a name="MIDIGetDriverIORunLoop">MIDIGetDriverIORunLoop</a></h3>
+
+		<pre>CFRunLoopRef <b>MIDIGetDriverIORunLoop</b>(
+);</pre>
+	
+		<p>Drivers typically need to receive asynchronous I/O completion callbacks
+		on a high-priority thread.  To save drivers from the trouble of
+		creating their own threads for this purpose, and to make efficient use
+		of system resources, the MIDIServer provides a thread which drivers may
+		use.</p>
+
+		<p>Drivers should do as little work as possible in this thread; typically,
+		just dequeueing and encoding output packets, and decoding input packets
+		into MIDIPacketLists to be passed to <a href="../Reference/MIDIServices.html#MIDIReceived"><tt>MIDIReceived</tt></a>.</p>
+
+		<p>This is a realtime-priority thread and shouldn't be used for anything
+		other than I/O.  For lower-priority purposes, drivers can use the
+		runloop which was current when they were constructed.</p>
+	<h4>Parameters</h4>
+<dl></dl>
+<b>Result:</b> 
+		The CFRunLoopRef of the server's driver I/O thread.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIGetDriverDeviceList"></a>
+<h3><a name="MIDIGetDriverDeviceList">MIDIGetDriverDeviceList</a></h3>
+
+		<pre><a href="../Reference/MIDIDriver.html#MIDIDeviceListRef">MIDIDeviceListRef</a> <b>MIDIGetDriverDeviceList</b>(
+  <a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a>  driver
+);</pre>
+	
+		<p>Returns the list of devices which are in the current MIDISetup and
+		which were created/owned by the specified driver.</p>
+
+		<p>The returned device list should be disposed (using
+		<a href="../Reference/MIDIDriver.html#MIDIDeviceListDispose"><tt>MIDIDeviceListDispose</tt></a>) by the caller.</p>
+
+		<p>New for CoreMIDI 1.1.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>driver</tt></dt>
+<dd>
+						The driver whose devices are to be returned.
+		</dd>
+</dl>
+<b>Result:</b> 
+		The requested device list.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIDriverEnableMonitoring"></a>
+<h3><a name="MIDIDriverEnableMonitoring">MIDIDriverEnableMonitoring</a></h3>
+
+		<pre>OSStatus <b>MIDIDriverEnableMonitoring</b>(
+  <a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a>  driver,
+  Boolean        enabled
+);</pre>
+	
+		<p>A driver may make this call to have MIDIServer pass it every outgoing
+		MIDI packet, to all destinations in the system (not just those
+		controlled by itself).</p>
+
+		<p>New for CoreMIDI 1.1.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>driver</tt></dt>
+<dd>
+						The driver whose Monitor function is to be enabled.
+		</dd>
+<dt><tt>enabled</tt></dt>
+<dd>
+						true to enable monitoring, false to disable it.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/tag/MIDIDriverInterface"></a>
+<h3><a name="MIDIDriverInterface">MIDIDriverInterface</a></h3>
+
+		<pre>struct MIDIDriverInterface {
+  IUNKNOWN_C_GUTS  ;
+  OSStatus         (*FindDevices)(<a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a> self, <a href="../Reference/MIDIDriver.html#MIDIDeviceListRef">MIDIDeviceListRef</a> devList);
+  OSStatus         (*Start)(<a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a> self, <a href="../Reference/MIDIDriver.html#MIDIDeviceListRef">MIDIDeviceListRef</a> devList);
+  OSStatus         (*Stop)(<a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a> self);
+  OSStatus         (*Configure)(<a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a> self, <a href="../Reference/MIDIServices.html#MIDIDeviceRef">MIDIDeviceRef</a> device);
+  OSStatus         (*Send)(<a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a> self, const <a href="../Reference/MIDIServices.html#MIDIPacketList">MIDIPacketList</a> *pktlist, void *destRefCon1, void *destRefCon2);
+  OSStatus         (*EnableSource)(<a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a> self, <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a> src, Boolean enabled);
+  OSStatus         (*Flush)(<a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a> self, <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a> dest, void *destRefCon1, void *destRefCon2);
+  OSStatus         (*Monitor)(<a href="../Reference/MIDIDriver.html#MIDIDriverRef">MIDIDriverRef</a> self, <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a> dest, const <a href="../Reference/MIDIServices.html#MIDIPacketList">MIDIPacketList</a> *pktlist);
+};</pre>
+	
+		
+	<h4>Fields</h4>
+<dl>
+<dt><tt>FindDevices</tt></dt>
+<dd>
+			<p>This is only called for version 1 drivers.  The server is
+			requesting that the driver detect the devices which are present. 
+			For each device present, the driver should create a <a href="../Reference/MIDIServices.html#MIDIDeviceRef"><tt>MIDIDeviceRef</tt></a>
+			with entities, using <a href="../Reference/MIDIDriver.html#MIDIDeviceCreate"><tt>MIDIDeviceCreate</tt></a> and <a href="../Reference/MIDISetup.html#MIDIDeviceAddEntity"><tt>MIDIDeviceAddEntity</tt></a>, and
+			add the device to the supplied <a href="../Reference/MIDIDriver.html#MIDIDeviceListRef"><tt>MIDIDeviceListRef</tt></a>, using
+			<a href="../Reference/MIDIDriver.html#MIDIDeviceListAddDevice"><tt>MIDIDeviceListAddDevice</tt></a>.</p>
+
+			<p>The driver should not retain any references to the created devices
+			and entities.</p>
+		</dd>
+<dt><tt>Start</tt></dt>
+<dd>
+			<p>The server is telling the driver to begin MIDI I/O.</p>
+
+			<p>The provided device list contains the devices which were previously
+			located by FindDevices (in the case of a version 1 driver), or the
+			devices which are owned by this driver and are currently in the
+			current MIDISetup (for version 2 drivers).</p>
+
+			<p>The provided devices may or may not still be present.  A version 1
+			driver should attempt to use as many of the devices as are actually
+			present.</p>
+
+			<p>A version 2 driver may make calls such as <a href="../Reference/MIDISetup.html#MIDISetupAddDevice"><tt>MIDISetupAddDevice</tt></a>,
+			<a href="../Reference/MIDISetup.html#MIDIDeviceAddEntity"><tt>MIDIDeviceAddEntity</tt></a>, <a href="../Reference/MIDISetup.html#MIDIDeviceRemoveEntity"><tt>MIDIDeviceRemoveEntity</tt></a> to dynamically modify
+			the system's current state. For devices in the provided device list
+			which are not present, the driver should set their
+			<a href="../Reference/MIDIServices.html#kMIDIPropertyOffline"><tt>kMIDIPropertyOffline</tt></a> property to 1.  A version 2 driver may also
+			set up notifications when the IORegistry changes, to detect
+			connection and disconnection of devices it wishes to control.  At
+			these times also, the driver may change the devices'
+			<a href="../Reference/MIDIServices.html#kMIDIPropertyOffline"><tt>kMIDIPropertyOffline</tt></a>, and dynamically modify the system's current
+			state to reflect the devices which are present.  When passing a
+			CFRunLoopRef to IOKit for notification purposes, the driver must
+			use the server's main runloop, which is obtained with
+			CFRunLoopGetCurrent().</p>
+
+			<p>The driver will probably want to iterate through the destination
+			endpoints and assign their driver refCons, so as to identify
+			multiple destinations when Send() is called.</p>
+
+			<p>The provided device list remains owned by the system and can be
+			assumed to contain only devices owned by this driver.  The driver
+			may retain references to the devices in this list and any it
+			creates while running.</p>
+		</dd>
+<dt><tt>Stop</tt></dt>
+<dd>
+			<p>The system is telling the driver to terminate MIDI I/O.  All I/O
+			operations that were begun in Start, or as a result of a subsequent
+			IOKit notification, should be terminated.</p>
+		</dd>
+<dt><tt>Configure</tt></dt>
+<dd>
+			<p>not currently used</p>
+		</dd>
+<dt><tt>Send</tt></dt>
+<dd>
+			<p>Send a <a href="../Reference/MIDIServices.html#MIDIPacketList"><tt>MIDIPacketList</tt></a> to the destination endpoint whose refCons are
+			being passed as arguments.</p>
+		</dd>
+<dt><tt>EnableSource</tt></dt>
+<dd>
+			<p>A client has opened or closed a connection, and now the server is
+			telling the driver that input from a particular source either does
+			or does not have any listeners in the system.  The driver may use
+			this information to decide whether to pass messages from the source
+			to the server, and it may even be able to tell the source hardware
+			not to generate incoming MIDI I/O for that source.</p>
+		</dd>
+<dt><tt>Flush</tt></dt>
+<dd>
+			<p>Only for version 2 drivers (new for CoreMIDI 1.1).</p>
+
+			<p>Drivers which support schedule-ahead, when receiving this message,
+			should unschedule all pending output to the specified destination. 
+			If the destination is null, the driver should unschedule all
+			pending output to all destinations.</p>
+		</dd>
+<dt><tt>Monitor</tt></dt>
+<dd>
+			<p>Only for version 2 drivers (new for CoreMIDI 1.1).</p>
+
+			<p>Some specialized drivers (e.g. a MIDI monitor display) may wish to
+			intercept and look at all outgoing MIDI messages.  After a driver
+			calls <a href="../Reference/MIDIDriver.html#MIDIDriverEnableMonitoring"><tt>MIDIDriverEnableMonitoring</tt></a>(true) on itself, this function is
+			called with the outgoing MIDI packets for all destinations in the
+			system.  The Monitor function cannot rely on the MIDI events
+			arriving in order, due to MIDIServer's schedule-ahead facilities.</p>
+		</dd>
+</dl>
+
+<hr>
+
+</body>
+</html>

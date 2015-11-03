@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN
+	"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html lang="en">
+<head>
+	<META http-equiv="content-type" CONTENT="text/html;charset=iso-8859-1">
+	<title>?Topics/appnotes?</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+<a name="ApplicationNotes"></a>
+<h1>Application Notes</h1><p>This document contains miscellaneous supplemental documentation for CoreMIDI.
+(Last updated October 2002).</p><a name="Displayofendpointnames"></a>
+<h2>Display of endpoint names</h2><p>Here is the recommended algorithm for display of a <a href="../Reference/MIDIServices.html#MIDIEndpointRef"><tt>MIDIEndpointRef</tt></a>'s name.</p><p>Get the endpoint's <a href="../Reference/MIDIServices.html#kMIDIPropertyConnectionUniqueID"><tt>kMIDIPropertyConnectionUniqueID</tt></a> property.</p><p>If the endpoint has exactly one connected external device, display the
+external device's name.</p><p>If the endpoint has multiple connected external devices, there are several 
+possibilities depending on the context:</p><ul>
+<li>Attempt to choose exactly one device to display (e.g. if the context involves
+events on only one MIDI channel, and only one of the devices receives on that channel,
+it's clearly reasonable to display only that device)</li>
+<li>Concatenate the names of all of the devices, separated by commas (some special
+characters such as slashes and dashes are common in device names)</li>
+<li>Display the physical MIDI port's name (as below)</li>
+</ul><p>If an endpoint has no connected external devices, display the endpoint's name,
+which will normally be inherited from its entity's name:</p><ul>
+<li>If the name obtained in this manner is an empty string, use <a href="../Reference/MIDIServices.html#MIDIEntityGetDevice"><tt>MIDIEntityGetDevice</tt></a>
+to obtain the device and use the device's name.  (This works around a bug
+in some versions of the AppleMIDIUSB driver.)</li>
+<li>If the name obtained in this manner is not unique among the other sources or
+destinations in the system, or, if your application has sufficient screen space
+to display long names, prepend the device's name and a space to the endpoint's name.</li>
+</ul><a name="Virtualdestinationsandscheduledevents"></a>
+<h2>Virtual destinations and scheduled events</h2><p>Creators of virtual destinations are encouraged to interpret MIDI System Reset
+messages (0xFF) as a command to flush all pending, previously-scheduled events.</p><p>Clients which send to virtual destinations are encouraged to send MIDI System
+Reset messages to do this.</p><p>A future implementation of MIDIEndpointFlush may send this message to a virtual
+destination.</p></body>
+</html>

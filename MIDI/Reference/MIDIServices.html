@@ -1,0 +1,2695 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN
+	"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html lang="en">
+<head>
+	<META http-equiv="content-type" CONTENT="text/html;charset=iso-8859-1">
+	<title>?Reference/MIDIServices?</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+<a name="CoreMIDI/MIDIServices.h"></a>
+<h1>CoreMIDI / MIDIServices.h</h1>
+<hr>
+
+	<table border="0" cellpadding="0" cellspacing="4">
+<tr><td colspan="3"><b>Functions</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIClientCreate">MIDIClientCreate</a></td>
+<td>
+		Create a MIDIClient object.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIClientDispose">MIDIClientDispose</a></td>
+<td>
+		Dispose a MIDIClient object.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIInputPortCreate">MIDIInputPortCreate</a></td>
+<td>
+		Create an input port through which the client may receive incoming MIDI
+		messages from any MIDI source.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIOutputPortCreate">MIDIOutputPortCreate</a></td>
+<td>
+		<p>Create an output port through which the client may send outgoing MIDI
+		messages to any MIDI destination.</p>
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIPortDispose">MIDIPortDispose</a></td>
+<td>
+		Dispose a MIDIPort object.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIPortConnectSource">MIDIPortConnectSource</a></td>
+<td>
+		Establish a connection from a source to a client's input port.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIPortDisconnectSource">MIDIPortDisconnectSource</a></td>
+<td>
+		Close a previously-established source-to-input port 
+					connection.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIGetNumberOfDevices">MIDIGetNumberOfDevices</a></td>
+<td>
+		Returns the number of devices in the system.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIGetDevice">MIDIGetDevice</a></td>
+<td>
+		Return one of the devices in the system.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIGetNumberOfSources">MIDIGetNumberOfSources</a></td>
+<td>
+		Returns the number of sources in the system.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIGetSource">MIDIGetSource</a></td>
+<td>
+		Return one of the sources in the system.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIGetNumberOfDestinations">MIDIGetNumberOfDestinations</a></td>
+<td>
+		Returns the number of destinations in the system.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIGetDestination">MIDIGetDestination</a></td>
+<td>
+		Return one of the destinations in the system.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIGetNumberOfExternalDevices">MIDIGetNumberOfExternalDevices</a></td>
+<td>
+		Returns the number of external MIDI devices in the system.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIGetExternalDevice">MIDIGetExternalDevice</a></td>
+<td>
+		Return one of the external devices in the system.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectFindByUniqueID">MIDIObjectFindByUniqueID</a></td>
+<td>
+		Locate a device, external device, entity, or endpoint
+					by its uniqueID.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIEntityGetDevice">MIDIEntityGetDevice</a></td>
+<td>
+		Returns an entity's device.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIEndpointGetEntity">MIDIEndpointGetEntity</a></td>
+<td>
+		Returns an endpoint's entity.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIDestinationCreate">MIDIDestinationCreate</a></td>
+<td>
+		Create a virtual destination in a client.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDISourceCreate">MIDISourceCreate</a></td>
+<td>
+		Create a virtual source in a client.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIEndpointDispose">MIDIEndpointDispose</a></td>
+<td>
+		Dispose a virtual source or destination your client created.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDISend">MIDISend</a></td>
+<td>
+		Send MIDI to a destination.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDISendSysex">MIDISendSysex</a></td>
+<td>
+		Send a single system-exclusive event, asynchronously.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIReceived">MIDIReceived</a></td>
+<td>
+		Distribute MIDI from a source to the client input ports
+					which are connected to that source.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIFlushOutput">MIDIFlushOutput</a></td>
+<td>
+		Unschedule previously-sent packets.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectGetIntegerProperty">MIDIObjectGetIntegerProperty</a></td>
+<td>
+		Get an object's integer-type property.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectSetIntegerProperty">MIDIObjectSetIntegerProperty</a></td>
+<td>
+		Set an object's integer-type property.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectGetStringProperty">MIDIObjectGetStringProperty</a></td>
+<td>
+		Get an object's string-type property.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectSetStringProperty">MIDIObjectSetStringProperty</a></td>
+<td>
+		Set an object's string-type property.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectGetDataProperty">MIDIObjectGetDataProperty</a></td>
+<td>
+		Get an object's data-type property.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectSetDataProperty">MIDIObjectSetDataProperty</a></td>
+<td>
+		Set an object's data-type property.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectGetDictionaryProperty">MIDIObjectGetDictionaryProperty</a></td>
+<td>
+		Get an object's dictionary-type property.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectSetDictionaryProperty">MIDIObjectSetDictionaryProperty</a></td>
+<td>
+		Set an object's dictionary-type property.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectGetProperties">MIDIObjectGetProperties</a></td>
+<td>
+		Get all of an object's properties.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectRemoveProperty">MIDIObjectRemoveProperty</a></td>
+<td>
+		Remove an object's property.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIRestart">MIDIRestart</a></td>
+<td>
+		Stops and restarts MIDI I/O.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIDeviceGetNumberOfEntities">MIDIDeviceGetNumberOfEntities</a></td>
+<td>
+		Return the number of entities in a given device.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIDeviceGetEntity">MIDIDeviceGetEntity</a></td>
+<td>
+		Return one of a given device's entities.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIEntityGetNumberOfSources">MIDIEntityGetNumberOfSources</a></td>
+<td>
+		Return the number of sources in a given entity.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIEntityGetSource">MIDIEntityGetSource</a></td>
+<td>
+		Return one of a given entity's sources.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIEntityGetNumberOfDestinations">MIDIEntityGetNumberOfDestinations</a></td>
+<td>
+		Return the number of destinations in a given entity.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIEntityGetDestination">MIDIEntityGetDestination</a></td>
+<td>
+		Return one of a given entity's destinations.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIPacketNext">MIDIPacketNext</a></td>
+<td>
+		Advance a <a href="../Reference/MIDIServices.html#MIDIPacket"><tt>MIDIPacket</tt></a> pointer to the <a href="../Reference/MIDIServices.html#MIDIPacket"><tt>MIDIPacket</tt></a> which
+					immediately follows it in memory if it is part of a
+					<a href="../Reference/MIDIServices.html#MIDIPacketList"><tt>MIDIPacketList</tt></a>.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIPacketListInit">MIDIPacketListInit</a></td>
+<td>
+		Prepare a <a href="../Reference/MIDIServices.html#MIDIPacketList"><tt>MIDIPacketList</tt></a> to be built up dynamically.
+	</td>
+</tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIPacketListAdd">MIDIPacketListAdd</a></td>
+<td>
+		Add a MIDI event to a <a href="../Reference/MIDIServices.html#MIDIPacketList"><tt>MIDIPacketList</tt></a>.
+	</td>
+</tr>
+<tr><td colspan="3"><b>Callbacks</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDINotifyProc">MIDINotifyProc</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIReadProc">MIDIReadProc</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDICompletionProc">MIDICompletionProc</a></td></tr>
+<tr><td colspan="3"><b>Defined Types</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIClientRef">MIDIClientRef</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIPortRef">MIDIPortRef</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIDeviceRef">MIDIDeviceRef</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIEntityRef">MIDIEntityRef</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDITimeStamp">MIDITimeStamp</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIUniqueID">MIDIUniqueID</a></td></tr>
+<tr><td colspan="3"><b>Structs</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIPacket">MIDIPacket</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIPacketList">MIDIPacketList</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDISysexSendRequest">MIDISysexSendRequest</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDINotification">MIDINotification</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectAddRemoveNotification">MIDIObjectAddRemoveNotification</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectPropertyChangeNotification">MIDIObjectPropertyChangeNotification</a></td></tr>
+<tr><td colspan="3"><b>Enumerations</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDINotificationMessageID">MIDINotificationMessageID</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#MIDIObjectType">MIDIObjectType</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#Errorcodes">Error codes</a></td></tr>
+<tr><td colspan="3"><b>Constants</b></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyName">kMIDIPropertyName</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyManufacturer">kMIDIPropertyManufacturer</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyModel">kMIDIPropertyModel</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyUniqueID">kMIDIPropertyUniqueID</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyDeviceID">kMIDIPropertyDeviceID</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyReceiveChannels">kMIDIPropertyReceiveChannels</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyTransmitChannels">kMIDIPropertyTransmitChannels</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyMaxSysExSpeed">kMIDIPropertyMaxSysExSpeed</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyAdvanceScheduleTimeMuSec">kMIDIPropertyAdvanceScheduleTimeMuSec</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyIsEmbeddedEntity">kMIDIPropertyIsEmbeddedEntity</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyIsBroadcast">kMIDIPropertyIsBroadcast</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertySingleRealtimeEntity">kMIDIPropertySingleRealtimeEntity</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyConnectionUniqueID">kMIDIPropertyConnectionUniqueID</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyOffline">kMIDIPropertyOffline</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyPrivate">kMIDIPropertyPrivate</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyDriverOwner">kMIDIPropertyDriverOwner</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyFactoryPatchNameFile">kMIDIPropertyFactoryPatchNameFile</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyUserPatchNameFile">kMIDIPropertyUserPatchNameFile</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyNameConfiguration">kMIDIPropertyNameConfiguration</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyImage">kMIDIPropertyImage</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyDriverVersion">kMIDIPropertyDriverVersion</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertySupportsGeneralMIDI">kMIDIPropertySupportsGeneralMIDI</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertySupportsMMC">kMIDIPropertySupportsMMC</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyCanRoute">kMIDIPropertyCanRoute</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyReceivesClock">kMIDIPropertyReceivesClock</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyReceivesMTC">kMIDIPropertyReceivesMTC</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyReceivesNotes">kMIDIPropertyReceivesNotes</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyReceivesProgramChanges">kMIDIPropertyReceivesProgramChanges</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyReceivesBankSelectMSB">kMIDIPropertyReceivesBankSelectMSB</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyReceivesBankSelectLSB">kMIDIPropertyReceivesBankSelectLSB</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyTransmitsClock">kMIDIPropertyTransmitsClock</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyTransmitsMTC">kMIDIPropertyTransmitsMTC</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyTransmitsNotes">kMIDIPropertyTransmitsNotes</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyTransmitsProgramChanges">kMIDIPropertyTransmitsProgramChanges</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyTransmitsBankSelectMSB">kMIDIPropertyTransmitsBankSelectMSB</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyTransmitsBankSelectLSB">kMIDIPropertyTransmitsBankSelectLSB</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyPanDisruptsStereo">kMIDIPropertyPanDisruptsStereo</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyIsSampler">kMIDIPropertyIsSampler</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyIsDrumMachine">kMIDIPropertyIsDrumMachine</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyIsMixer">kMIDIPropertyIsMixer</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyIsEffectUnit">kMIDIPropertyIsEffectUnit</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyMaxReceiveChannels">kMIDIPropertyMaxReceiveChannels</a></td></tr>
+<tr valign="top"><td width="32">&nbsp;</td><td><a href="../Reference/MIDIServices.html#kMIDIPropertyMaxTransmitChannels">kMIDIPropertyMaxTransmitChannels</a></td></tr>
+</table>
+
+
+<hr>
+
+<a name="//apple_ref/c/tdef/MIDIObjectRef"></a>
+<h3><a name="MIDIObjectRef">MIDIObjectRef</a></h3>
+
+		<pre>typedef void *<b>MIDIObjectRef</b>;</pre>
+	
+		<p>MIDIObject is the base class for many of the objects in CoreMIDI.  They
+		have properties, and often an "owner" object, from which they inherit
+		any properties they do not themselves have.</p>
+
+		<p>Developers may add their own private properties, whose names must begin
+		with their company's inverted domain name, as in Java package names,
+		but with underscores instead of dots, e.g.:
+		<code>com_apple_APrivateAppleProperty</code></p>
+	<hr>
+
+<a name="//apple_ref/c/tdef/MIDIClientRef"></a>
+<h3><a name="MIDIClientRef">MIDIClientRef</a></h3>
+
+		<pre>typedef struct OpaqueMIDIClient *<b>MIDIClientRef</b>;</pre>
+	
+		<p>Derives from <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a>, does not have an owner object.</p>
+
+		<p>To use CoreMIDI, an application creates a <tt>MIDIClientRef</tt>, to which it
+		can add <a href="../Reference/MIDIServices.html#MIDIPortRef"><tt>MIDIPortRef</tt></a>'s, through which it can send and receive MIDI.</p>
+	<hr>
+
+<a name="//apple_ref/c/tdef/MIDIPortRef"></a>
+<h3><a name="MIDIPortRef">MIDIPortRef</a></h3>
+
+		<pre>typedef struct OpaqueMIDIPort *<b>MIDIPortRef</b>;</pre>
+	
+		<p>Derives from <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a>, owned by a <a href="../Reference/MIDIServices.html#MIDIClientRef"><tt>MIDIClientRef</tt></a>.</p>
+
+		<p>A <tt>MIDIPortRef</tt>, which may be an input port or output port, is an object
+		through which a client may communicate with any number of MIDI sources
+		or destinations.</p>
+	<hr>
+
+<a name="//apple_ref/c/tdef/MIDIDeviceRef"></a>
+<h3><a name="MIDIDeviceRef">MIDIDeviceRef</a></h3>
+
+		<pre>typedef struct OpaqueMIDIDevice *<b>MIDIDeviceRef</b>;</pre>
+	
+		<p>Derives from <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a>, does not have an owner object.</p>
+	
+		<p>A MIDI device, which either attaches directly to the 
+		computer and is controlled by a MIDI driver, or which is
+		"external," meaning that it is connected to a driver-controlled
+		device via a standard MIDI cable.</p>
+		
+		<p>A <tt>MIDIDeviceRef</tt> has properties and contains <a href="../Reference/MIDIServices.html#MIDIEntityRef"><tt>MIDIEntityRef</tt></a>'s.</p>
+	<hr>
+
+<a name="//apple_ref/c/tdef/MIDIEntityRef"></a>
+<h3><a name="MIDIEntityRef">MIDIEntityRef</a></h3>
+
+		<pre>typedef struct OpaqueMIDIEntity *<b>MIDIEntityRef</b>;</pre>
+	
+		<p>Derives from <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a>, owned by a <a href="../Reference/MIDIServices.html#MIDIDeviceRef"><tt>MIDIDeviceRef</tt></a>.</p>
+
+		<p>Devices may have multiple logically distinct sub-components, e.g. a
+		MIDI synthesizer and a pair of MIDI ports, both addressable via a USB
+		port.</p>
+
+		<p>By grouping a device's endpoints into entities, the system has enough
+		information for an application to make reasonable assumptions about how
+		to communicate in a bi-directional manner with each entity, as is
+		desirable in MIDI librarian applications.</p>
+
+		<p>These sub-components are <tt>MIDIEntityRef</tt>'s.</p>
+	<hr>
+
+<a name="//apple_ref/c/tdef/MIDIEndpointRef"></a>
+<h3><a name="MIDIEndpointRef">MIDIEndpointRef</a></h3>
+
+		<pre>typedef struct OpaqueMIDIEndpoint *<b>MIDIEndpointRef</b>;</pre>
+	
+		<p>Derives from <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a>, owned by a <a href="../Reference/MIDIServices.html#MIDIEntityRef"><tt>MIDIEntityRef</tt></a>, unless it is a
+		virtual endpoint (in which case it has no owner).</p>
+
+		<p>Entities have any number of <tt>MIDIEndpointRef</tt>'s, sources and destinations
+		of 16-channel MIDI streams.</p>
+	<hr>
+
+<a name="//apple_ref/c/tdef/MIDITimeStamp"></a>
+<h3><a name="MIDITimeStamp">MIDITimeStamp</a></h3>
+
+		<pre>typedef UInt64 <b>MIDITimeStamp</b>;</pre>
+	
+		<p>A host clock time representing the time of an event, as returned by
+		AudioGetCurrentHostTime() (or UpTime()).</p>
+
+		<p>Since MIDI applications will tend to do a fair amount of math with the
+		times of events, it's more convenient to use a UInt64 than an
+		AbsoluteTime.</p>
+
+		<p>See CoreAudio/HostTime.h.</p>
+	<hr>
+
+<a name="//apple_ref/c/tdef/MIDIUniqueID"></a>
+<h3><a name="MIDIUniqueID">MIDIUniqueID</a></h3>
+
+		<pre>typedef SInt32 <b>MIDIUniqueID</b>;</pre>
+	
+		<p>An integer which uniquely and persistently identifies a <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a>.</p>
+	<hr>
+
+<a name="//apple_ref/c/tdef/MIDINotifyProc"></a>
+<h3><a name="MIDINotifyProc">MIDINotifyProc</a></h3>
+
+		<pre>typedef void (*<b>MIDINotifyProc</b>)(
+  const <a href="../Reference/MIDIServices.html#MIDINotification">MIDINotification</a> *  message,
+  void *                    refCon
+);</pre>
+	
+		<p>This callback function is called when some aspect of the current MIDI
+		setup changes.  It is called on the runloop (thread) on which
+		<a href="../Reference/MIDIServices.html#MIDIClientCreate"><tt>MIDIClientCreate</tt></a> was first called.</p>
+		
+		<p>A number of messages are defined -- see <a href="../Reference/MIDIServices.html#MIDINotificationMessageID"><tt>MIDINotificationMessageID</tt></a>.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>message</tt></dt>
+<dd>
+						A structure containing information about what changed.
+		</dd>
+<dt><tt>refCon</tt></dt>
+<dd>
+						The client's refCon passed to <a href="../Reference/MIDIServices.html#MIDIClientCreate"><tt>MIDIClientCreate</tt></a>.
+		</dd>
+</dl>
+<hr>
+
+<a name="//apple_ref/c/tdef/MIDIReadProc"></a>
+<h3><a name="MIDIReadProc">MIDIReadProc</a></h3>
+
+		<pre>typedef void (*<b>MIDIReadProc</b>)(
+  const <a href="../Reference/MIDIServices.html#MIDIPacketList">MIDIPacketList</a> *  pktlist,
+  void *                  readProcRefCon,
+  void *                  srcConnRefCon
+);</pre>
+	
+		<p>This is a callback function through which a client receives incoming
+		MIDI messages.</p>
+
+		<p>A <tt>MIDIReadProc</tt> function pointer is passed to the <a href="../Reference/MIDIServices.html#MIDIInputPortCreate"><tt>MIDIInputPortCreate</tt></a>
+		and <a href="../Reference/MIDIServices.html#MIDIDestinationCreate"><tt>MIDIDestinationCreate</tt></a> functions.  The CoreMIDI framework will
+		create a high-priority receive thread on your client's behalf, and from
+		that thread, your <tt>MIDIReadProc</tt> will be called when incoming MIDI
+		messages arrive.  Because this function is called from a separate
+		thread, be aware of the synchronization issues when accessing data in
+		this callback.  Also, since this thread may be running at a very high
+		priority, be aware that making memory allocations may adversely
+		affect your application's realtime performance.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>pktlist</tt></dt>
+<dd>
+						The incoming MIDI message(s).
+		</dd>
+<dt><tt>readProcRefCon</tt></dt>
+<dd>
+						The refCon you passed to <a href="../Reference/MIDIServices.html#MIDIInputPortCreate"><tt>MIDIInputPortCreate</tt></a> or
+						<a href="../Reference/MIDIServices.html#MIDIDestinationCreate"><tt>MIDIDestinationCreate</tt></a>
+		</dd>
+<dt><tt>srcConnRefCon</tt></dt>
+<dd>
+						A refCon you passed to <a href="../Reference/MIDIServices.html#MIDIPortConnectSource"><tt>MIDIPortConnectSource</tt></a>, which
+						identifies the source of the data.
+		</dd>
+</dl>
+<hr>
+
+<a name="//apple_ref/c/tdef/MIDICompletionProc"></a>
+<h3><a name="MIDICompletionProc">MIDICompletionProc</a></h3>
+
+		<pre>typedef void (*<b>MIDICompletionProc</b>)(
+  <a href="../Reference/MIDIServices.html#MIDISysexSendRequest">MIDISysexSendRequest</a> *  request
+);</pre>
+	
+		<p>Callback function to notify the client of the completion of
+		a call to <a href="../Reference/MIDIServices.html#MIDISendSysex"><tt>MIDISendSysex</tt></a>.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>request</tt></dt>
+<dd>
+						The <a href="../Reference/MIDIServices.html#MIDISysexSendRequest"><tt>MIDISysexSendRequest</tt></a> which has completed, or been
+						aborted.
+		</dd>
+</dl>
+<hr>
+
+<a name="//apple_ref/c/tag/MIDIPacket"></a>
+<h3><a name="MIDIPacket">MIDIPacket</a></h3>
+
+		<pre>struct MIDIPacket {
+  <a href="../Reference/MIDIServices.html#MIDITimeStamp">MIDITimeStamp</a>  timeStamp;
+  UInt16         length;
+  Byte           data[256];
+};</pre>
+	
+		One or more MIDI events occuring at a particular time.
+	<h4>Fields</h4>
+<dl>
+<dt><tt>timeStamp</tt></dt>
+<dd>
+						The time at which the events occurred, if receiving MIDI,
+						or, if sending MIDI, the time at which the events are to
+						be played.  Zero means "now."  The time stamp applies
+						to the first MIDI byte in the packet.
+		</dd>
+<dt><tt>length</tt></dt>
+<dd>
+						The number of valid MIDI bytes which follow, in data. (It
+						may be larger than 256 bytes if the packet is dynamically
+						allocated.)
+		</dd>
+<dt><tt>data</tt></dt>
+<dd>
+						A variable-length stream of MIDI messages.  Running status
+						is not allowed.  In the case of system-exclusive
+						messages, a packet may only contain a single message, or
+						portion of one, with no other MIDI events.
+						
+						The MIDI messages in the packet must always be complete,
+						except for system-exclusive.
+						
+						Single-byte MIDI realtime messages may not occur between
+						the status and data bytes of other messages, except in
+						system-exclusive.<p>
+
+						(This is declared to be 256 bytes in length so clients
+						don't have to create custom data structures in simple
+						situations.)
+		</dd>
+</dl>
+
+<hr>
+
+<a name="//apple_ref/c/tag/MIDIPacketList"></a>
+<h3><a name="MIDIPacketList">MIDIPacketList</a></h3>
+
+		<pre>struct MIDIPacketList {
+  UInt32      numPackets;
+  <a href="../Reference/MIDIServices.html#MIDIPacket">MIDIPacket</a>  packet[1];
+};</pre>
+	
+		<p>A list of MIDI events being received from, or being sent to, one
+		endpoint.  Note that the packets, while defined as an array, may not be
+		accessed as an array, since they are variable-length.  To iterate
+		through the packets in a packet list, use a loop such as:</p>
+
+		<pre>
+	<a href="../Reference/MIDIServices.html#MIDIPacket">MIDIPacket</a> *packet = &packetList->packet[0];
+	for (int i = 0; i < packetList->numPackets; ++i) {
+		...
+		packet = <a href="../Reference/MIDIServices.html#MIDIPacketNext">MIDIPacketNext</a>(packet);
+	}</pre>
+	<h4>Fields</h4>
+<dl>
+<dt><tt>numPackets</tt></dt>
+<dd>
+						The number of MIDIPackets in the list.
+		</dd>
+<dt><tt>packet</tt></dt>
+<dd>
+						An open-ended array of variable-length MIDIPackets.
+		</dd>
+</dl>
+
+<hr>
+
+<a name="//apple_ref/c/tag/MIDISysexSendRequest"></a>
+<h3><a name="MIDISysexSendRequest">MIDISysexSendRequest</a></h3>
+
+		<pre>struct MIDISysexSendRequest {
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a>     destination;
+  Byte *              data;
+  UInt32              bytesToSend;
+  Boolean             complete;
+  Byte                reserved[3];
+  <a href="../Reference/MIDIServices.html#MIDICompletionProc">MIDICompletionProc</a>  completionProc;
+  void *              completionRefCon;
+};</pre>
+	
+		<p>An asynchronous request to send a single system-exclusive MIDI event to
+		a MIDI destination.</p>
+	<h4>Fields</h4>
+<dl>
+<dt><tt>destination</tt></dt>
+<dd>
+						The endpoint to which the event is to be sent.
+		</dd>
+<dt><tt>data</tt></dt>
+<dd>
+						Initially, a pointer to the sys-ex event to be sent.
+						<a href="../Reference/MIDIServices.html#MIDISendSysex"><tt>MIDISendSysex</tt></a> will advance this pointer as bytes are
+						sent.
+		</dd>
+<dt><tt>bytesToSend</tt></dt>
+<dd>
+						Initially, the number of bytes to be sent.  <a href="../Reference/MIDIServices.html#MIDISendSysex"><tt>MIDISendSysex</tt></a>
+						will decrement this counter as bytes are sent.
+		</dd>
+<dt><tt>complete</tt></dt>
+<dd>
+						The client may set this to true at any time to abort
+						transmission.  The implementation sets this to true when
+						all bytes have been sent.
+		</dd>
+<dt><tt>completionProc</tt></dt>
+<dd>
+						Called when all bytes have been sent, or after the client
+						has set complete to true.
+		</dd>
+<dt><tt>completionRefCon</tt></dt>
+<dd>
+						Passed as a refCon to completionProc.
+		</dd>
+</dl>
+
+<hr>
+
+<a name="//apple_ref/c/tag/MIDINotificationMessageID"></a>
+<h3><a name="MIDINotificationMessageID">MIDINotificationMessageID</a></h3>
+
+		<pre>typedef SInt32 <b>MIDINotificationMessageID</b>;</pre>
+		<pre>enum {
+  kMIDIMsgSetupChanged            = 1,
+  kMIDIMsgObjectAdded             = 2,
+  kMIDIMsgObjectRemoved           = 3,
+  kMIDIMsgPropertyChanged         = 4,
+  kMIDIMsgThruConnectionsChanged  = 5,
+  kMIDIMsgSerialPortOwnerChanged  = 6
+};</pre>
+	
+		
+	<h4>Constants</h4>
+<dl>
+<dt><a name="//apple_ref/c/econst/kMIDIMsgSetupChanged"><tt>kMIDIMsgSetupChanged</tt></a></dt>
+<dd>
+			Some aspect of the current MIDISetup has changed.  No data.  Should
+			ignore this message if messages 2-6 are handled.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIMsgObjectAdded"><tt>kMIDIMsgObjectAdded</tt></a></dt>
+<dd>
+			A device, entity or endpoint was added. Structure is
+			<a href="../Reference/MIDIServices.html#MIDIObjectAddRemoveNotification"><tt>MIDIObjectAddRemoveNotification</tt></a>. New for CoreMIDI 1.3.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIMsgObjectRemoved"><tt>kMIDIMsgObjectRemoved</tt></a></dt>
+<dd>
+			A device, entity or endpoint was removed. Structure is
+			<a href="../Reference/MIDIServices.html#MIDIObjectAddRemoveNotification"><tt>MIDIObjectAddRemoveNotification</tt></a>. New for CoreMIDI 1.3.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIMsgPropertyChanged"><tt>kMIDIMsgPropertyChanged</tt></a></dt>
+<dd>
+			An object's property was changed. Structure is
+			<a href="../Reference/MIDIServices.html#MIDIObjectPropertyChangeNotification"><tt>MIDIObjectPropertyChangeNotification</tt></a>. New for CoreMIDI 1.3.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIMsgThruConnectionsChanged"><tt>kMIDIMsgThruConnectionsChanged</tt></a></dt>
+<dd>
+			A persistent MIDI Thru connection was created or destroyed.  No data.  New
+			for CoreMIDI 1.3.
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIMsgSerialPortOwnerChanged"><tt>kMIDIMsgSerialPortOwnerChanged</tt></a></dt>
+<dd>
+			A persistent MIDI Thru connection was created or destroyed.  No data.  New
+			for CoreMIDI 1.3.
+		</dd>
+</dl><hr>
+
+<a name="//apple_ref/c/tag/MIDINotification"></a>
+<h3><a name="MIDINotification">MIDINotification</a></h3>
+
+		<pre>struct MIDINotification {
+  <a href="../Reference/MIDIServices.html#MIDINotificationMessageID">MIDINotificationMessageID</a>  messageID;
+  ByteCount                  messageSize;
+};</pre>
+	
+		<p>A <tt>MIDINotification</tt> is a structure passed to a <a href="../Reference/MIDIServices.html#MIDINotifyProc"><tt>MIDINotifyProc</tt></a>, when
+		CoreMIDI wishes to inform a client of a change in the state of the
+		system.</p>
+	<h4>Fields</h4>
+<dl>
+<dt><tt>messageID</tt></dt>
+<dd>
+						type of message
+		</dd>
+<dt><tt>messageSize</tt></dt>
+<dd>
+						size of the entire message, including messageID and
+						messageSize
+		</dd>
+</dl>
+
+<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyName"></a>
+<h3><a name="kMIDIPropertyName">kMIDIPropertyName</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyName</b>;</pre>
+	
+		<p>device/entity/endpoint property, string</p>
+	
+		<p>Devices, entities, and endpoints may all have names.  The recommended way
+		to display an endpoint's name is to ask for the endpoint name, and display
+		only that name if it is unique.  If it is non-unique, prepend the device
+		name.</p>
+		
+		<p>A setup editor may allow the user to set the names of both driver-owned 
+		and external devices.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyManufacturer"></a>
+<h3><a name="kMIDIPropertyManufacturer">kMIDIPropertyManufacturer</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyManufacturer</b>;</pre>
+	
+		<p>device/endpoint property, string</p>
+	
+		<p>Drivers should set this property on their devices.</p>
+		
+		<p>Setup editors may allow the user to set this property on external devices.</p>
+		
+		<p>Creators of virtual endpoints may set this property on their endpoints.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyModel"></a>
+<h3><a name="kMIDIPropertyModel">kMIDIPropertyModel</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyModel</b>;</pre>
+	
+		<p>device/endpoint property, string</p>
+
+		<p>Drivers should set this property on their devices.</p>
+		
+		<p>Setup editors may allow the user to set this property on external devices.</p>
+		
+		<p>Creators of virtual endpoints may set this property on their endpoints.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyUniqueID"></a>
+<h3><a name="kMIDIPropertyUniqueID">kMIDIPropertyUniqueID</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyUniqueID</b>;</pre>
+	
+		<p>devices, entities, endpoints all have unique ID's, integer</p>
+	
+		<p>The system assigns unique ID's to all objects.  Creators of virtual
+		endpoints may set this property on their endpoints, though doing so
+		may fail if the chosen ID is not unique.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyDeviceID"></a>
+<h3><a name="kMIDIPropertyDeviceID">kMIDIPropertyDeviceID</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyDeviceID</b>;</pre>
+	
+		<p>device/entity property, integer</p>
+	
+		<p>The entity's system-exclusive ID, in user-visible form</p>
+		
+		<p>Drivers may set this property on their devices or entities.</p>
+		
+		<p>Setup editors may allow the user to set this property on
+		external devices.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyReceiveChannels"></a>
+<h3><a name="kMIDIPropertyReceiveChannels">kMIDIPropertyReceiveChannels</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyReceiveChannels</b>;</pre>
+	
+		<p>endpoint property, integer</p>
+
+		<p>The value is a bitmap of channels on which the object receives,
+		(1<<0)=ch 1...(1<<15)=ch 16.</p>
+		
+		<p>Drivers may set this property on their entities or endpoints.</p>
+		
+		<p>Setup editors may allow the user to set this property on external
+		endpoints.</p>
+		
+		<p>Virtual destinations may set this property on their endpoints.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyTransmitChannels"></a>
+<h3><a name="kMIDIPropertyTransmitChannels">kMIDIPropertyTransmitChannels</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyTransmitChannels</b>;</pre>
+	
+		<p>endpoint property, integer</p>
+
+		<p>The value is a bitmap of channels on which the object transmits, (1<<0)=ch 1...(1<<15)=ch 16</p>
+		
+		<p>New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyMaxSysExSpeed"></a>
+<h3><a name="kMIDIPropertyMaxSysExSpeed">kMIDIPropertyMaxSysExSpeed</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyMaxSysExSpeed</b>;</pre>
+	
+		<p>device/entity/endpoint property, integer</p>
+
+		<p>Set by the owning driver; should not be touched by other clients.
+		maximum bytes/second of sysex messages sent to it
+		(default is 3125, as with MIDI 1.0)</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyAdvanceScheduleTimeMuSec"></a>
+<h3><a name="kMIDIPropertyAdvanceScheduleTimeMuSec">kMIDIPropertyAdvanceScheduleTimeMuSec</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyAdvanceScheduleTimeMuSec</b>;</pre>
+	
+		<p>device/entity/endpoint property, integer</p>
+
+		<p>Set by the owning driver; should not be touched by other clients.
+		If it is > 0, then it is a recommendation of how many microseconds 
+		in advance clients should schedule output.  Clients should treat this
+		value as a minimum.  For devices with a > 0 advance schedule time, 
+		drivers will receive outgoing messages to the device at the time they 
+		are sent by the client, via <a href="../Reference/MIDIServices.html#MIDISend"><tt>MIDISend</tt></a>, and the driver is responsible 
+		for scheduling events to be played at the right times according to their
+		timestamps.</p>
+		
+		<p>As of CoreMIDI 1.3, this property may also be set on virtual destinations
+		(but only the creator of the destination should do so).
+		When a client sends to a virtual destination with an advance schedule time
+		of 0, the virtual destination receives its messages at their scheduled
+		delivery time.  If a virtual destination has a non-zero advance schedule time,
+		it receives timestamped messages as soon as they are sent, and must do its
+		own scheduling of the events.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyIsEmbeddedEntity"></a>
+<h3><a name="kMIDIPropertyIsEmbeddedEntity">kMIDIPropertyIsEmbeddedEntity</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyIsEmbeddedEntity</b>;</pre>
+	
+		<p>entity/endpoint property, integer<p>
+
+		0 if there are external MIDI connectors, 1 if not.<p>
+
+		New for CoreMIDI 1.1.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyIsBroadcast"></a>
+<h3><a name="kMIDIPropertyIsBroadcast">kMIDIPropertyIsBroadcast</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyIsBroadcast</b>;</pre>
+	
+		<p>entity/endpoint property, integer<p>
+
+		1 if the endpoint broadcasts messages to all of the other endpoints
+		in the device, 0 if not.  Set by the owning driver; should not be touched
+		by other clients.<p>
+
+		New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertySingleRealtimeEntity"></a>
+<h3><a name="kMIDIPropertySingleRealtimeEntity">kMIDIPropertySingleRealtimeEntity</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertySingleRealtimeEntity</b>;</pre>
+	
+		<p>device property, integer</p>
+
+		<p>Some MIDI interfaces cannot route MIDI realtime messages to individual
+		outputs; they are broadcast.  On such devices the inverse is usually
+		also true -- incoming realtime messages cannot be identified as originating
+		from any particular source.</p>
+		
+		<p>When this property is set on a driver device, it signifies the 0-based index of
+		the entity on which incoming realtime messages from the device will appear
+		to have originated from.</p>
+
+		<p>New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyConnectionUniqueID"></a>
+<h3><a name="kMIDIPropertyConnectionUniqueID">kMIDIPropertyConnectionUniqueID</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyConnectionUniqueID</b>;</pre>
+	
+		<p>device/entity/endpoint property, integer or CFDataRef</p>
+
+		<p><a href="../Reference/MIDIServices.html#MIDIUniqueID"><tt>MIDIUniqueID</tt></a> of an external device/entity/endpoint attached to this one
+		(recommended but not required that it be an endpoint).
+		A driver-owned entity or endpoint has this property to refer
+		to an external MIDI device that is connected to it.</p>
+		
+		<p>The property is non-existant or 0 if there is no connection.</p>
+
+		<p>New for CoreMIDI 1.1.</p>
+		
+		<p>Beginning with CoreMIDI 1.3, this property may be a CFDataRef containing
+		an array of big-endian SInt32's, to allow specifying that a driver object connects
+		to multiple external objects (via MIDI thru-ing or splitting).</p>
+		
+		<p>This property may also exist for external devices/entities/endpoints,
+		in which case it signifies a MIDI Thru connection to another external
+		device/entity/endpoint (again, recommended that it be an endpoint).</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyOffline"></a>
+<h3><a name="kMIDIPropertyOffline">kMIDIPropertyOffline</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyOffline</b>;</pre>
+	
+		<p>device/entity/endpoint property, integer</p>
+
+		<p>1 = device is offline (is temporarily absent), 0 = present
+		Set by the owning driver, on the device; should not be touched by other clients.
+		Property is inherited from the device by its entities and endpoints.</p>
+
+		<p>New for CoreMIDI 1.1.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyPrivate"></a>
+<h3><a name="kMIDIPropertyPrivate">kMIDIPropertyPrivate</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyPrivate</b>;</pre>
+	
+		<p>device/entity/endpoint property, integer</p>
+
+		<p>1 = endpoint is private, hidden from other clients.
+		May be set on a device or entity, but they will still appear in the API; only
+		affects whether the owned endpoints are hidden.</p>
+
+		<p>New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyDriverOwner"></a>
+<h3><a name="kMIDIPropertyDriverOwner">kMIDIPropertyDriverOwner</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyDriverOwner</b>;</pre>
+	
+		<p>device/entity/endpoint property, string</p>
+
+		<p>Name of the driver that owns a device.
+		Set by the owning driver, on the device; should not be touched by other clients.
+		Property is inherited from the device by its entities and endpoints.</p>
+
+		<p>New for CoreMIDI 1.1.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyFactoryPatchNameFile"></a>
+<h3><a name="kMIDIPropertyFactoryPatchNameFile">kMIDIPropertyFactoryPatchNameFile</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyFactoryPatchNameFile</b>;</pre>
+	
+		<p>device/entity/endpoint property, CFData containing AliasHandle</p>
+
+		<p>An alias to the device's current factory patch name file.</p>
+
+		<p>Added in CoreMIDI 1.1.  DEPRECATED as of CoreMIDI 1.3.
+		Use <a href="../Reference/MIDIServices.html#kMIDIPropertyNameConfiguration"><tt>kMIDIPropertyNameConfiguration</tt></a> instead.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyUserPatchNameFile"></a>
+<h3><a name="kMIDIPropertyUserPatchNameFile">kMIDIPropertyUserPatchNameFile</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyUserPatchNameFile</b>;</pre>
+	
+		<p>device/entity/endpoint property, CFData containing AliasHandle</p>
+
+		<p>An alias to the device's current user patch name file.</p>
+
+		<p>Added in CoreMIDI 1.1.  DEPRECATED as of CoreMIDI 1.3.
+		Use <a href="../Reference/MIDIServices.html#kMIDIPropertyNameConfiguration"><tt>kMIDIPropertyNameConfiguration</tt></a> instead.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyNameConfiguration"></a>
+<h3><a name="kMIDIPropertyNameConfiguration">kMIDIPropertyNameConfiguration</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyNameConfiguration</b>;</pre>
+	
+		<p>device/entity/endpoint property, CFDictionary</p>
+
+		<p>This specifies the device's current patch, note and control name values
+		using the MIDINameDocument XML format.  This specification requires the
+		use of higher-level, OS-specific constructs outside of the
+		specification, to fully define the current names for a device.</p>
+
+		<p>The MIDINameConfiguration property is implementated as a CFDictionary:</p>
+
+		<p>(Note: this was amended 26 Nov 2002, AFTER the Dec 2002 Developer CD)</p>
+
+		<p>key "master" maps to a CFDataRef containing an AliasHandle referring to
+		the device's master name document.</p>
+
+		<p>key "banks" maps to a CFDictionaryRef.  This dictionary's keys are
+		CFStringRef names of patchBank elements in the master document, and its
+		values are each a CFDictionaryRef: key "file" maps to a CFDataRef
+		containing an AliasHandle to a document containing patches that
+		override those in the master document, and key "patchNameList" maps to
+		a CFStringRef which is the name of the patchNameList element in the
+		overriding document. </p>
+		
+		<p>key "currentChannelNameSets" maps to a 16-element CFArrayRef, each element of
+		which is a CFStringRef of the name of the current name set for each of the
+		16 MIDI channels.</p>
+		
+		<p>key "currentDeviceMode" maps to a CFStringRef containing the name
+		of the device's current mode.</p>
+
+		<p>Clients setting this property must take particular care to preserve
+		dictionary values other than the ones they are interested in changing,
+		and to properly structure the dictionary.</p>
+
+		<p>New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyImage"></a>
+<h3><a name="kMIDIPropertyImage">kMIDIPropertyImage</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyImage</b>;</pre>
+	
+		<p>device property, CFStringRef which is a full POSIX path to a device
+		or external device's icon, stored in any standard graphic file format
+		such as JPEG, GIF, PNG and TIFF are all acceptable.  (See CFURL for
+		functions to convert between POSIX paths and other ways of specifying
+		files.)  The image's maximum size should be 128x128.</p>
+
+		<p>Drivers should set the icon on the devices they add.</p>
+
+		<p>A studio setup editor should allow the user to choose icons for
+		external devices.</p>
+
+		<p>New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyDriverVersion"></a>
+<h3><a name="kMIDIPropertyDriverVersion">kMIDIPropertyDriverVersion</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyDriverVersion</b>;</pre>
+	
+		<p>device/entity/endpoint property, integer, returns the driver version
+		API of the owning driver (only for driver- owned devices).  Drivers
+		need not set this property; applications should not write to it.</p>
+
+		<p>New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertySupportsGeneralMIDI"></a>
+<h3><a name="kMIDIPropertySupportsGeneralMIDI">kMIDIPropertySupportsGeneralMIDI</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertySupportsGeneralMIDI</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertySupportsMMC"></a>
+<h3><a name="kMIDIPropertySupportsMMC">kMIDIPropertySupportsMMC</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertySupportsMMC</b>;</pre>
+	
+		<p>(MMC = MIDI Machine Control).  device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyCanRoute"></a>
+<h3><a name="kMIDIPropertyCanRoute">kMIDIPropertyCanRoute</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyCanRoute</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyReceivesClock"></a>
+<h3><a name="kMIDIPropertyReceivesClock">kMIDIPropertyReceivesClock</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyReceivesClock</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyReceivesMTC"></a>
+<h3><a name="kMIDIPropertyReceivesMTC">kMIDIPropertyReceivesMTC</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyReceivesMTC</b>;</pre>
+	
+		<p>(MTC = MIDI Time Code).  device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyReceivesNotes"></a>
+<h3><a name="kMIDIPropertyReceivesNotes">kMIDIPropertyReceivesNotes</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyReceivesNotes</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyReceivesProgramChanges"></a>
+<h3><a name="kMIDIPropertyReceivesProgramChanges">kMIDIPropertyReceivesProgramChanges</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyReceivesProgramChanges</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyReceivesBankSelectMSB"></a>
+<h3><a name="kMIDIPropertyReceivesBankSelectMSB">kMIDIPropertyReceivesBankSelectMSB</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyReceivesBankSelectMSB</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyReceivesBankSelectLSB"></a>
+<h3><a name="kMIDIPropertyReceivesBankSelectLSB">kMIDIPropertyReceivesBankSelectLSB</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyReceivesBankSelectLSB</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyTransmitsClock"></a>
+<h3><a name="kMIDIPropertyTransmitsClock">kMIDIPropertyTransmitsClock</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyTransmitsClock</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyTransmitsMTC"></a>
+<h3><a name="kMIDIPropertyTransmitsMTC">kMIDIPropertyTransmitsMTC</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyTransmitsMTC</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyTransmitsNotes"></a>
+<h3><a name="kMIDIPropertyTransmitsNotes">kMIDIPropertyTransmitsNotes</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyTransmitsNotes</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyTransmitsProgramChanges"></a>
+<h3><a name="kMIDIPropertyTransmitsProgramChanges">kMIDIPropertyTransmitsProgramChanges</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyTransmitsProgramChanges</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyTransmitsBankSelectMSB"></a>
+<h3><a name="kMIDIPropertyTransmitsBankSelectMSB">kMIDIPropertyTransmitsBankSelectMSB</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyTransmitsBankSelectMSB</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyTransmitsBankSelectLSB"></a>
+<h3><a name="kMIDIPropertyTransmitsBankSelectLSB">kMIDIPropertyTransmitsBankSelectLSB</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyTransmitsBankSelectLSB</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyPanDisruptsStereo"></a>
+<h3><a name="kMIDIPropertyPanDisruptsStereo">kMIDIPropertyPanDisruptsStereo</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyPanDisruptsStereo</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyIsSampler"></a>
+<h3><a name="kMIDIPropertyIsSampler">kMIDIPropertyIsSampler</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyIsSampler</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyIsDrumMachine"></a>
+<h3><a name="kMIDIPropertyIsDrumMachine">kMIDIPropertyIsDrumMachine</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyIsDrumMachine</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyIsMixer"></a>
+<h3><a name="kMIDIPropertyIsMixer">kMIDIPropertyIsMixer</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyIsMixer</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyIsEffectUnit"></a>
+<h3><a name="kMIDIPropertyIsEffectUnit">kMIDIPropertyIsEffectUnit</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyIsEffectUnit</b>;</pre>
+	
+		<p>device/entity property, integer (0-1).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyMaxReceiveChannels"></a>
+<h3><a name="kMIDIPropertyMaxReceiveChannels">kMIDIPropertyMaxReceiveChannels</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyMaxReceiveChannels</b>;</pre>
+	
+		<p>device/entity property, integer (0-16).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/data/kMIDIPropertyMaxTransmitChannels"></a>
+<h3><a name="kMIDIPropertyMaxTransmitChannels">kMIDIPropertyMaxTransmitChannels</a></h3>
+
+		<pre>const CFStringRef <b>kMIDIPropertyMaxTransmitChannels</b>;</pre>
+	
+		<p>device/entity property, integer (0-16).  New for CoreMIDI 1.3.</p>
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIClientCreate"></a>
+<h3><a name="MIDIClientCreate">MIDIClientCreate</a></h3>
+
+		Create a MIDIClient object.
+	
+		<pre>OSStatus <b>MIDIClientCreate</b>(
+  CFStringRef      name,
+  <a href="../Reference/MIDIServices.html#MIDINotifyProc">MIDINotifyProc</a>   notifyProc,
+  void *           notifyRefCon,
+  <a href="../Reference/MIDIServices.html#MIDIClientRef">MIDIClientRef</a> *  outClient
+);</pre>
+	
+		All clients must be created and disposed on the same thread.
+	<h4>Parameters</h4>
+<dl><dt><tt>name</tt></dt>
+<dd>
+						The client's name.
+		</dd>
+<dt><tt>notifyProc</tt></dt>
+<dd>
+						An optional (may be NULL) callback function through which
+						the client will receive notifications of changes to the
+						system.
+		</dd>
+<dt><tt>notifyRefCon</tt></dt>
+<dd>
+						A refCon passed back to notifyRefCon
+		</dd>
+<dt><tt>outClient</tt></dt>
+<dd>
+						On successful return, points to the newly-created
+						<a href="../Reference/MIDIServices.html#MIDIClientRef"><tt>MIDIClientRef</tt></a>.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIClientDispose"></a>
+<h3><a name="MIDIClientDispose">MIDIClientDispose</a></h3>
+
+		Dispose a MIDIClient object.
+	
+		<pre>OSStatus <b>MIDIClientDispose</b>(
+  <a href="../Reference/MIDIServices.html#MIDIClientRef">MIDIClientRef</a>  client
+);</pre>
+	
+		It is not essential to call this function; the CoreMIDI framework will
+		automatically dispose all MIDIClients when an application terminates.
+	<h4>Parameters</h4>
+<dl><dt><tt>client</tt></dt>
+<dd>
+						The client to dispose.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIInputPortCreate"></a>
+<h3><a name="MIDIInputPortCreate">MIDIInputPortCreate</a></h3>
+
+		Create an input port through which the client may receive incoming MIDI
+		messages from any MIDI source.
+	
+		<pre>OSStatus <b>MIDIInputPortCreate</b>(
+  <a href="../Reference/MIDIServices.html#MIDIClientRef">MIDIClientRef</a>  client,
+  CFStringRef    portName,
+  <a href="../Reference/MIDIServices.html#MIDIReadProc">MIDIReadProc</a>   readProc,
+  void *         refCon,
+  <a href="../Reference/MIDIServices.html#MIDIPortRef">MIDIPortRef</a> *  outPort
+);</pre>
+	
+		<p>After creating a port, use <a href="../Reference/MIDIServices.html#MIDIPortConnectSource"><tt>MIDIPortConnectSource</tt></a> to establish an input
+		connection from any number of sources to your port.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>client</tt></dt>
+<dd>
+						The client to own the newly-created port.
+		</dd>
+<dt><tt>portName</tt></dt>
+<dd>
+						The name of the port.
+		</dd>
+<dt><tt>readProc</tt></dt>
+<dd>
+						The <a href="../Reference/MIDIServices.html#MIDIReadProc"><tt>MIDIReadProc</tt></a> which will be called with incoming MIDI,
+						from sources connected to this port.
+		</dd>
+<dt><tt>refCon</tt></dt>
+<dd>
+						The refCon passed to readHook.
+		</dd>
+<dt><tt>outPort</tt></dt>
+<dd>
+						On successful return, points to the newly-created
+						MIDIPort.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIOutputPortCreate"></a>
+<h3><a name="MIDIOutputPortCreate">MIDIOutputPortCreate</a></h3>
+
+		<p>Create an output port through which the client may send outgoing MIDI
+		messages to any MIDI destination.</p>
+	
+		<pre>OSStatus <b>MIDIOutputPortCreate</b>(
+  <a href="../Reference/MIDIServices.html#MIDIClientRef">MIDIClientRef</a>  client,
+  CFStringRef    portName,
+  <a href="../Reference/MIDIServices.html#MIDIPortRef">MIDIPortRef</a> *  outPort
+);</pre>
+	
+		<p>Output ports provide a mechanism for MIDI merging.  The system assumes
+		that each output port will be responsible for sending only a single
+		MIDI stream to each destination, although a single port may address all
+		of the destinations in the system.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>client</tt></dt>
+<dd>
+						The client to own the newly-created port
+		</dd>
+<dt><tt>portName</tt></dt>
+<dd>
+						The name of the port.
+		</dd>
+<dt><tt>outPort</tt></dt>
+<dd>
+						On successful return, points to the newly-created
+						MIDIPort.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIPortDispose"></a>
+<h3><a name="MIDIPortDispose">MIDIPortDispose</a></h3>
+
+		Dispose a MIDIPort object.
+	
+		<pre>OSStatus <b>MIDIPortDispose</b>(
+  <a href="../Reference/MIDIServices.html#MIDIPortRef">MIDIPortRef</a>  port
+);</pre>
+	
+		<p>It is not usually necessary to call this function; when an
+		application's MIDIClient's are automatically disposed at termination,
+		or explicitly, via <a href="../Reference/MIDIServices.html#MIDIClientDispose"><tt>MIDIClientDispose</tt></a>, the client's ports are
+		automatically disposed at this time.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>port</tt></dt>
+<dd>
+						The port to dispose.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIPortConnectSource"></a>
+<h3><a name="MIDIPortConnectSource">MIDIPortConnectSource</a></h3>
+
+		Establish a connection from a source to a client's input port.
+	
+		<pre>OSStatus <b>MIDIPortConnectSource</b>(
+  <a href="../Reference/MIDIServices.html#MIDIPortRef">MIDIPortRef</a>      port,
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a>  source,
+  void *           connRefCon
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>port</tt></dt>
+<dd>
+						The port to which to create the connection.  This port's
+						readProc is called with incoming MIDI from the source.
+		</dd>
+<dt><tt>source</tt></dt>
+<dd>
+						The source from which to create the connection.
+		</dd>
+<dt><tt>connRefCon</tt></dt>
+<dd>
+						This refCon is passed to the <a href="../Reference/MIDIServices.html#MIDIReadProc"><tt>MIDIReadProc</tt></a>, as a way to
+						identify the source.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIPortDisconnectSource"></a>
+<h3><a name="MIDIPortDisconnectSource">MIDIPortDisconnectSource</a></h3>
+
+		Close a previously-established source-to-input port 
+					connection.
+	
+		<pre>OSStatus <b>MIDIPortDisconnectSource</b>(
+  <a href="../Reference/MIDIServices.html#MIDIPortRef">MIDIPortRef</a>      port,
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a>  source
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>port</tt></dt>
+<dd>
+						The port whose connection is being closed.
+		</dd>
+<dt><tt>source</tt></dt>
+<dd>
+						The source from which to close a connection to the
+						specified port.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIGetNumberOfDevices"></a>
+<h3><a name="MIDIGetNumberOfDevices">MIDIGetNumberOfDevices</a></h3>
+
+		Returns the number of devices in the system.
+	
+		<pre>ItemCount <b>MIDIGetNumberOfDevices</b>(
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl></dl>
+<b>Result:</b> 
+		The number of devices in the system, or 0 if an error 
+					occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIGetDevice"></a>
+<h3><a name="MIDIGetDevice">MIDIGetDevice</a></h3>
+
+		Return one of the devices in the system.
+	
+		<pre><a href="../Reference/MIDIServices.html#MIDIDeviceRef">MIDIDeviceRef</a> <b>MIDIGetDevice</b>(
+  ItemCount  deviceIndex0
+);</pre>
+	
+		<p>Use this to enumerate the devices in the system.</p>
+
+		<p>To enumerate the entities in the system, you can walk through the
+		devices, then walk through the devices' entities.</p>
+
+		<p>Note: If a client iterates through the devices and entities in the
+		system, it will not ever visit any virtual sources and destinations
+		created by other clients.  Also, a device iteration will return devices
+		which are "offline" (were present in the past but are not currently
+		present), while iterations through the system's sources and
+		destinations will not include the endpoints of offline devices.</p>
+
+		<p>Thus clients should usually prefer <a href="../Reference/MIDIServices.html#MIDIGetNumberOfSources"><tt>MIDIGetNumberOfSources</tt></a>,
+		<a href="../Reference/MIDIServices.html#MIDIGetSource"><tt>MIDIGetSource</tt></a>, <a href="../Reference/MIDIServices.html#MIDIGetNumberOfDestinations"><tt>MIDIGetNumberOfDestinations</tt></a> and <a href="../Reference/MIDIServices.html#MIDIGetDestination"><tt>MIDIGetDestination</tt></a> to
+		iterating through devices and entities to locate endpoints.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>deviceIndex0</tt></dt>
+<dd>
+						The index (0...<a href="../Reference/MIDIServices.html#MIDIGetNumberOfDevices"><tt>MIDIGetNumberOfDevices</tt></a>()-1) of the device
+						to return.
+		</dd>
+</dl>
+<b>Result:</b> 
+		A reference to a device, or NULL if an error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIGetNumberOfSources"></a>
+<h3><a name="MIDIGetNumberOfSources">MIDIGetNumberOfSources</a></h3>
+
+		Returns the number of sources in the system.
+	
+		<pre>ItemCount <b>MIDIGetNumberOfSources</b>(
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl></dl>
+<b>Result:</b> 
+		The number of sources in the system, or 0 if an error
+					occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIGetSource"></a>
+<h3><a name="MIDIGetSource">MIDIGetSource</a></h3>
+
+		Return one of the sources in the system.
+	
+		<pre><a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a> <b>MIDIGetSource</b>(
+  ItemCount  sourceIndex0
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>sourceIndex0</tt></dt>
+<dd>
+						The index (0...<a href="../Reference/MIDIServices.html#MIDIGetNumberOfSources"><tt>MIDIGetNumberOfSources</tt></a>()-1) of the source
+						to return
+		</dd>
+</dl>
+<b>Result:</b> 
+		A reference to a source, or NULL if an error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIGetNumberOfDestinations"></a>
+<h3><a name="MIDIGetNumberOfDestinations">MIDIGetNumberOfDestinations</a></h3>
+
+		Returns the number of destinations in the system.
+	
+		<pre>ItemCount <b>MIDIGetNumberOfDestinations</b>(
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl></dl>
+<b>Result:</b> 
+		The number of destinations in the system, or 0 if an error 
+					occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIGetDestination"></a>
+<h3><a name="MIDIGetDestination">MIDIGetDestination</a></h3>
+
+		Return one of the destinations in the system.
+	
+		<pre><a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a> <b>MIDIGetDestination</b>(
+  ItemCount  destIndex0
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>destIndex0</tt></dt>
+<dd>
+						The index (0...<a href="../Reference/MIDIServices.html#MIDIGetNumberOfDestinations"><tt>MIDIGetNumberOfDestinations</tt></a>()-1) of the
+						destination to return
+		</dd>
+</dl>
+<b>Result:</b> 
+		A reference to a destination, or NULL if an error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIGetNumberOfExternalDevices"></a>
+<h3><a name="MIDIGetNumberOfExternalDevices">MIDIGetNumberOfExternalDevices</a></h3>
+
+		Returns the number of external MIDI devices in the system.
+	
+		<pre>ItemCount <b>MIDIGetNumberOfExternalDevices</b>(
+);</pre>
+	
+		<p>External MIDI devices are MIDI devices connected to endpoints via a
+		standard MIDI cable.  Their presence is completely optional, only when
+		a UI somewhere adds them.</p>
+					
+		<p>New for CoreMIDI 1.1.</p>
+	<h4>Parameters</h4>
+<dl></dl>
+<b>Result:</b> 
+		The number of external devices in the system, or 0 if an error 
+					occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIGetExternalDevice"></a>
+<h3><a name="MIDIGetExternalDevice">MIDIGetExternalDevice</a></h3>
+
+		Return one of the external devices in the system.
+	
+		<pre><a href="../Reference/MIDIServices.html#MIDIDeviceRef">MIDIDeviceRef</a> <b>MIDIGetExternalDevice</b>(
+  ItemCount  deviceIndex0
+);</pre>
+	
+		<p>Use this to enumerate the external devices in the system.</p>
+
+		<p>New for CoreMIDI 1.1.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>deviceIndex0</tt></dt>
+<dd>
+						The index (0...<a href="../Reference/MIDIServices.html#MIDIGetNumberOfDevices"><tt>MIDIGetNumberOfDevices</tt></a>()-1) of the device
+						to return.
+		</dd>
+</dl>
+<b>Result:</b> 
+		A reference to a device, or NULL if an error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIObjectFindByUniqueID"></a>
+<h3><a name="MIDIObjectFindByUniqueID">MIDIObjectFindByUniqueID</a></h3>
+
+		Locate a device, external device, entity, or endpoint
+					by its uniqueID.
+	
+		<pre>OSStatus <b>MIDIObjectFindByUniqueID</b>(
+  <a href="../Reference/MIDIServices.html#MIDIUniqueID">MIDIUniqueID</a>      inUniqueID,
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a> *   outObject,
+  <a href="../Reference/MIDIServices.html#MIDIObjectType">MIDIObjectType</a> *  outObjectType
+);</pre>
+	
+		New for CoreMIDI 1.3.
+	<h4>Parameters</h4>
+<dl><dt><tt>inUniqueID</tt></dt>
+<dd>
+						The uniqueID of the object to search for.  (This should
+						be the result of an earlier call to <a href="../Reference/MIDIServices.html#MIDIObjectGetIntegerProperty"><tt>MIDIObjectGetIntegerProperty</tt></a>
+						for the property <a href="../Reference/MIDIServices.html#kMIDIPropertyUniqueID"><tt>kMIDIPropertyUniqueID</tt></a>).
+		</dd>
+<dt><tt>outObject</tt></dt>
+<dd>
+						The returned object, or NULL if the object was not found or
+						an error occurred.  This should be cast to the appropriate
+						type (<a href="../Reference/MIDIServices.html#MIDIDeviceRef"><tt>MIDIDeviceRef</tt></a>, <a href="../Reference/MIDIServices.html#MIDIEntityRef"><tt>MIDIEntityRef</tt></a>, <a href="../Reference/MIDIServices.html#MIDIEndpointRef"><tt>MIDIEndpointRef</tt></a>),
+						according to *outObjectType.
+		</dd>
+<dt><tt>outObjectType</tt></dt>
+<dd>
+						On exit, the type of object which was found; undefined
+						if none found.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus error code, including <a href="../Reference/MIDIServices.html#Errorcodes"><tt>kMIDIObjectNotFound</tt></a> if there
+					is no object with the specified uniqueID.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIEntityGetDevice"></a>
+<h3><a name="MIDIEntityGetDevice">MIDIEntityGetDevice</a></h3>
+
+		Returns an entity's device.
+	
+		<pre>OSStatus <b>MIDIEntityGetDevice</b>(
+  <a href="../Reference/MIDIServices.html#MIDIEntityRef">MIDIEntityRef</a>    inEntity,
+  <a href="../Reference/MIDIServices.html#MIDIDeviceRef">MIDIDeviceRef</a> *  outDevice
+);</pre>
+	
+		New for CoreMIDI 1.3.
+	<h4>Parameters</h4>
+<dl></dl>
+<hr>
+
+<a name="//apple_ref/c/func/MIDIEndpointGetEntity"></a>
+<h3><a name="MIDIEndpointGetEntity">MIDIEndpointGetEntity</a></h3>
+
+		Returns an endpoint's entity.
+	
+		<pre>OSStatus <b>MIDIEndpointGetEntity</b>(
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a>  inEndpoint,
+  <a href="../Reference/MIDIServices.html#MIDIEntityRef">MIDIEntityRef</a> *  outEntity
+);</pre>
+	
+		<p>Virtual sources and destinations don't have entities.</p>
+	
+		<p>New for CoreMIDI 1.3.</p>
+	<h4>Parameters</h4>
+<dl></dl>
+<hr>
+
+<a name="//apple_ref/c/func/MIDIDestinationCreate"></a>
+<h3><a name="MIDIDestinationCreate">MIDIDestinationCreate</a></h3>
+
+		Create a virtual destination in a client.
+	
+		<pre>OSStatus <b>MIDIDestinationCreate</b>(
+  <a href="../Reference/MIDIServices.html#MIDIClientRef">MIDIClientRef</a>      client,
+  CFStringRef        name,
+  <a href="../Reference/MIDIServices.html#MIDIReadProc">MIDIReadProc</a>       readProc,
+  void *             refCon,
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a> *  outDest
+);</pre>
+	
+		<p>Clients may use this to create virtual destinations.</p>
+	
+		<p>The specified readProc gets called when clients send MIDI to
+		your virtual destination.</p>
+
+		<p>Drivers need not call this; when they create devices and
+		entities, sources and destinations are created at that time.</p>
+		
+		<p>See the discussion of <a href="../Reference/MIDIServices.html#kMIDIPropertyAdvanceScheduleTimeMuSec"><tt>kMIDIPropertyAdvanceScheduleTimeMuSec</tt></a>
+		for notes about the relationship between when a sender sends
+		MIDI to the destination and when it is received.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>client</tt></dt>
+<dd>
+						The client owning the virtual destination.
+		</dd>
+<dt><tt>name</tt></dt>
+<dd>
+						The name of the virtual destination.
+		</dd>
+<dt><tt>readProc</tt></dt>
+<dd>
+						The <a href="../Reference/MIDIServices.html#MIDIReadProc"><tt>MIDIReadProc</tt></a> to be called when a client sends MIDI to
+						the virtual destination.
+		</dd>
+<dt><tt>refCon</tt></dt>
+<dd>
+						The refCon to be passed to the readProc.
+		</dd>
+<dt><tt>outDest</tt></dt>
+<dd>
+						On successful return, a pointer to the newly-created
+						destination.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDISourceCreate"></a>
+<h3><a name="MIDISourceCreate">MIDISourceCreate</a></h3>
+
+		Create a virtual source in a client.
+	
+		<pre>OSStatus <b>MIDISourceCreate</b>(
+  <a href="../Reference/MIDIServices.html#MIDIClientRef">MIDIClientRef</a>      client,
+  CFStringRef        name,
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a> *  outSrc
+);</pre>
+	
+		<p>Clients may use this to create virtual sources.</p>
+
+		<p>Drivers need not call this; when they create devices and entities,
+		sources and destinations are created at that time.</p>
+
+		<p>After creating a virtual source, use <a href="../Reference/MIDIServices.html#MIDIReceived"><tt>MIDIReceived</tt></a> to transmit MIDI
+		messages from your virtual source to any clients connected to the
+		virtual source.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>client</tt></dt>
+<dd>
+						The client owning the virtual source.
+		</dd>
+<dt><tt>name</tt></dt>
+<dd>
+						The name of the virtual source.
+		</dd>
+<dt><tt>outSrc</tt></dt>
+<dd>
+						On successful return, a pointer to the newly-created
+						source.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIEndpointDispose"></a>
+<h3><a name="MIDIEndpointDispose">MIDIEndpointDispose</a></h3>
+
+		Dispose a virtual source or destination your client created.
+	
+		<pre>OSStatus <b>MIDIEndpointDispose</b>(
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a>  endpt
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>endpt</tt></dt>
+<dd>
+	The endpoint to be disposed.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDISend"></a>
+<h3><a name="MIDISend">MIDISend</a></h3>
+
+		Send MIDI to a destination.
+	
+		<pre>OSStatus <b>MIDISend</b>(
+  <a href="../Reference/MIDIServices.html#MIDIPortRef">MIDIPortRef</a>             port,
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a>         dest,
+  const <a href="../Reference/MIDIServices.html#MIDIPacketList">MIDIPacketList</a> *  pktlist
+);</pre>
+	
+		<p>Events with future timestamps are scheduled for future delivery.  The
+		system performs any needed MIDI merging.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>port</tt></dt>
+<dd>
+						The output port through which the MIDI is to be sent.
+		</dd>
+<dt><tt>dest</tt></dt>
+<dd>
+						The destination to receive the events.
+		</dd>
+<dt><tt>pktlist</tt></dt>
+<dd>
+						The MIDI events to be sent.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDISendSysex"></a>
+<h3><a name="MIDISendSysex">MIDISendSysex</a></h3>
+
+		Send a single system-exclusive event, asynchronously.
+	
+		<pre>OSStatus <b>MIDISendSysex</b>(
+  <a href="../Reference/MIDIServices.html#MIDISysexSendRequest">MIDISysexSendRequest</a> *  request
+);</pre>
+	
+		<code>request->data</code> must point to a single MIDI system-exclusive 
+					message, or portion thereof.
+	<h4>Parameters</h4>
+<dl><dt><tt>request</tt></dt>
+<dd>
+						Contains the destination, and the MIDI data to be sent.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIReceived"></a>
+<h3><a name="MIDIReceived">MIDIReceived</a></h3>
+
+		Distribute MIDI from a source to the client input ports
+					which are connected to that source.
+	
+		<pre>OSStatus <b>MIDIReceived</b>(
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a>         src,
+  const <a href="../Reference/MIDIServices.html#MIDIPacketList">MIDIPacketList</a> *  pktlist
+);</pre>
+	
+		<p>Drivers should call this function when receiving MIDI from a source.</p>
+
+		<p>Clients which have created virtual sources, using <a href="../Reference/MIDIServices.html#MIDISourceCreate"><tt>MIDISourceCreate</tt></a>,
+		should call this function when the source is generating MIDI.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>src</tt></dt>
+<dd>
+						The source which is transmitting MIDI.
+		</dd>
+<dt><tt>pktlist</tt></dt>
+<dd>
+						The MIDI events to be transmitted.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIFlushOutput"></a>
+<h3><a name="MIDIFlushOutput">MIDIFlushOutput</a></h3>
+
+		Unschedule previously-sent packets.
+	
+		<pre>OSStatus <b>MIDIFlushOutput</b>(
+  <a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a>  dest
+);</pre>
+	
+		<p>Clients may use <tt>MIDIFlushOutput</tt> to cancel the sending of packets that
+		were previously scheduled for future delivery.</p>
+
+		<p>New for CoreMIDI 1.1.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>dest</tt></dt>
+<dd>
+						All pending events scheduled to be sent to this destination
+						are unscheduled.  If NULL, the operation applies to
+						all destinations.
+		</dd>
+</dl>
+<hr>
+
+<a name="//apple_ref/c/func/MIDIObjectGetIntegerProperty"></a>
+<h3><a name="MIDIObjectGetIntegerProperty">MIDIObjectGetIntegerProperty</a></h3>
+
+		Get an object's integer-type property.
+	
+		<pre>OSStatus <b>MIDIObjectGetIntegerProperty</b>(
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>  obj,
+  CFStringRef    propertyID,
+  SInt32 *       outValue
+);</pre>
+	
+		(See the <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a> documentation for information about properties.)
+	<h4>Parameters</h4>
+<dl><dt><tt>obj</tt></dt>
+<dd>
+						The object whose property is to be returned.
+		</dd>
+<dt><tt>propertyID</tt></dt>
+<dd>
+						Name of the property to return.
+		</dd>
+<dt><tt>outValue</tt></dt>
+<dd>
+						On successful return, the value of the property.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIObjectSetIntegerProperty"></a>
+<h3><a name="MIDIObjectSetIntegerProperty">MIDIObjectSetIntegerProperty</a></h3>
+
+		Set an object's integer-type property.
+	
+		<pre>OSStatus <b>MIDIObjectSetIntegerProperty</b>(
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>  obj,
+  CFStringRef    propertyID,
+  SInt32         value
+);</pre>
+	
+		(See the <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a> documentation for information about properties.)
+	<h4>Parameters</h4>
+<dl><dt><tt>obj</tt></dt>
+<dd>
+						The object whose property is to be altered.
+		</dd>
+<dt><tt>propertyID</tt></dt>
+<dd>
+						Name of the property to set.
+		</dd>
+<dt><tt>value</tt></dt>
+<dd>
+						New value of the property.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIObjectGetStringProperty"></a>
+<h3><a name="MIDIObjectGetStringProperty">MIDIObjectGetStringProperty</a></h3>
+
+		Get an object's string-type property.
+	
+		<pre>OSStatus <b>MIDIObjectGetStringProperty</b>(
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>  obj,
+  CFStringRef    propertyID,
+  CFStringRef *  str
+);</pre>
+	
+		(See the <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a> documentation for information about properties.)
+	<h4>Parameters</h4>
+<dl><dt><tt>obj</tt></dt>
+<dd>
+						The object whose property is to be returned.
+		</dd>
+<dt><tt>propertyID</tt></dt>
+<dd>
+						Name of the property to return.
+		</dd>
+<dt><tt>str</tt></dt>
+<dd>
+						On successful return, the value of the property.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIObjectSetStringProperty"></a>
+<h3><a name="MIDIObjectSetStringProperty">MIDIObjectSetStringProperty</a></h3>
+
+		Set an object's string-type property.
+	
+		<pre>OSStatus <b>MIDIObjectSetStringProperty</b>(
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>  obj,
+  CFStringRef    propertyID,
+  CFStringRef    str
+);</pre>
+	
+		(See the <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a> documentation for information about properties.)
+	<h4>Parameters</h4>
+<dl><dt><tt>obj</tt></dt>
+<dd>
+						The object whose property is to be altered.
+		</dd>
+<dt><tt>propertyID</tt></dt>
+<dd>
+						Name of the property to set.
+		</dd>
+<dt><tt>str</tt></dt>
+<dd>
+						New value of the property.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIObjectGetDataProperty"></a>
+<h3><a name="MIDIObjectGetDataProperty">MIDIObjectGetDataProperty</a></h3>
+
+		Get an object's data-type property.
+	
+		<pre>OSStatus <b>MIDIObjectGetDataProperty</b>(
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>  obj,
+  CFStringRef    propertyID,
+  CFDataRef *    outData
+);</pre>
+	
+		(See the <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a> documentation for information about properties.)
+	<h4>Parameters</h4>
+<dl><dt><tt>obj</tt></dt>
+<dd>
+						The object whose property is to be returned.
+		</dd>
+<dt><tt>propertyID</tt></dt>
+<dd>
+						Name of the property to return.
+		</dd>
+<dt><tt>outData</tt></dt>
+<dd>
+						On successful return, the value of the property.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIObjectSetDataProperty"></a>
+<h3><a name="MIDIObjectSetDataProperty">MIDIObjectSetDataProperty</a></h3>
+
+		Set an object's data-type property.
+	
+		<pre>OSStatus <b>MIDIObjectSetDataProperty</b>(
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>  obj,
+  CFStringRef    propertyID,
+  CFDataRef      data
+);</pre>
+	
+		(See the <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a> documentation for information about properties.)
+	<h4>Parameters</h4>
+<dl><dt><tt>obj</tt></dt>
+<dd>
+						The object whose property is to be altered.
+		</dd>
+<dt><tt>propertyID</tt></dt>
+<dd>
+						Name of the property to set.
+		</dd>
+<dt><tt>data</tt></dt>
+<dd>
+						New value of the property.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIObjectGetDictionaryProperty"></a>
+<h3><a name="MIDIObjectGetDictionaryProperty">MIDIObjectGetDictionaryProperty</a></h3>
+
+		Get an object's dictionary-type property.
+	
+		<pre>OSStatus <b>MIDIObjectGetDictionaryProperty</b>(
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>      obj,
+  CFStringRef        propertyID,
+  CFDictionaryRef *  outDict
+);</pre>
+	
+		<p>(See the <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a> documentation for information about properties.)</p>
+					
+		<p>New for CoreMIDI 1.3.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>obj</tt></dt>
+<dd>
+						The object whose property is to be returned.
+		</dd>
+<dt><tt>propertyID</tt></dt>
+<dd>
+						Name of the property to return.
+		</dd>
+<dt><tt>outDict</tt></dt>
+<dd>
+						On successful return, the value of the property.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIObjectSetDictionaryProperty"></a>
+<h3><a name="MIDIObjectSetDictionaryProperty">MIDIObjectSetDictionaryProperty</a></h3>
+
+		Set an object's dictionary-type property.
+	
+		<pre>OSStatus <b>MIDIObjectSetDictionaryProperty</b>(
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>    obj,
+  CFStringRef      propertyID,
+  CFDictionaryRef  data
+);</pre>
+	
+		<p>(See the <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a> documentation for information about properties.)</p>
+	
+		<p>New for CoreMIDI 1.3.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>obj</tt></dt>
+<dd>
+						The object whose property is to be altered.
+		</dd>
+<dt><tt>propertyID</tt></dt>
+<dd>
+						Name of the property to set.
+		</dd>
+<dt><tt>dict</tt></dt>
+<dd>
+						New value of the property.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIObjectGetProperties"></a>
+<h3><a name="MIDIObjectGetProperties">MIDIObjectGetProperties</a></h3>
+
+		Get all of an object's properties.
+	
+		<pre>OSStatus <b>MIDIObjectGetProperties</b>(
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>        obj,
+  CFPropertyListRef *  outProperties,
+  Boolean              deep
+);</pre>
+	
+		<p>Returns a CFPropertyList of all of an object's properties. The property
+		list may be a dictionary or an array. Dictionaries map property names
+		(CFString) to values, which may be CFNumber, CFString, or CFData. 
+		Arrays are arrays of such values.</p>
+
+		<p>Properties which an object inherits from its owning object (if any) are
+		not included.</p>
+
+		<p>New for CoreMIDI 1.1.</p>
+	<h4>Parameters</h4>
+<dl><dt><tt>obj</tt></dt>
+<dd>
+						The object whose properties are to be returned.
+		</dd>
+<dt><tt>outProperties</tt></dt>
+<dd>
+						On successful return, the object's properties.
+		</dd>
+<dt><tt>deep</tt></dt>
+<dd>
+						true if the object's child objects are to be included
+						(e.g. a device's entities, or an entity's endpoints).
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIObjectRemoveProperty"></a>
+<h3><a name="MIDIObjectRemoveProperty">MIDIObjectRemoveProperty</a></h3>
+
+		Remove an object's property.
+	
+		<pre>OSStatus <b>MIDIObjectRemoveProperty</b>(
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>  obj,
+  CFStringRef    propertyID
+);</pre>
+	
+		New for CoreMIDI 1.3.
+	<h4>Parameters</h4>
+<dl><dt><tt>obj</tt></dt>
+<dd>
+						The object whose property is to be removed.
+		</dd>
+<dt><tt>propertyID</tt></dt>
+<dd>
+						The property to be removed.
+		</dd>
+</dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIRestart"></a>
+<h3><a name="MIDIRestart">MIDIRestart</a></h3>
+
+		Stops and restarts MIDI I/O.
+	
+		<pre>OSStatus <b>MIDIRestart</b>(
+);</pre>
+	
+		<p>This is useful for forcing the system to have drivers rescan hardware,
+		especially in the case of serial MIDI interfaces.</p>
+
+		<p>New for CoreMIDI 1.1.</p>
+	<h4>Parameters</h4>
+<dl></dl>
+<b>Result:</b> 
+		An OSStatus result code.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIDeviceGetNumberOfEntities"></a>
+<h3><a name="MIDIDeviceGetNumberOfEntities">MIDIDeviceGetNumberOfEntities</a></h3>
+
+		Return the number of entities in a given device.
+	
+		<pre>ItemCount <b>MIDIDeviceGetNumberOfEntities</b>(
+  <a href="../Reference/MIDIServices.html#MIDIDeviceRef">MIDIDeviceRef</a>  device
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>device</tt></dt>
+<dd>
+						The device being queried.
+		</dd>
+</dl>
+<b>Result:</b> 
+		The number of entities the device contains, or 0 if an
+					error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIDeviceGetEntity"></a>
+<h3><a name="MIDIDeviceGetEntity">MIDIDeviceGetEntity</a></h3>
+
+		Return one of a given device's entities.
+	
+		<pre><a href="../Reference/MIDIServices.html#MIDIEntityRef">MIDIEntityRef</a> <b>MIDIDeviceGetEntity</b>(
+  <a href="../Reference/MIDIServices.html#MIDIDeviceRef">MIDIDeviceRef</a>  device,
+  ItemCount      entityIndex0
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>device</tt></dt>
+<dd>
+						The device being queried.
+		</dd>
+<dt><tt>entityIndex0</tt></dt>
+<dd>
+						The index (0...<a href="../Reference/MIDIServices.html#MIDIDeviceGetNumberOfEntities"><tt>MIDIDeviceGetNumberOfEntities</tt></a>(device)-1)
+						of the entity to return
+		</dd>
+</dl>
+<b>Result:</b> 
+		A reference to an entity, or NULL if an error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIEntityGetNumberOfSources"></a>
+<h3><a name="MIDIEntityGetNumberOfSources">MIDIEntityGetNumberOfSources</a></h3>
+
+		Return the number of sources in a given entity.
+	
+		<pre>ItemCount <b>MIDIEntityGetNumberOfSources</b>(
+  <a href="../Reference/MIDIServices.html#MIDIEntityRef">MIDIEntityRef</a>  entity
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>entity</tt></dt>
+<dd>
+						The entity being queried
+		</dd>
+</dl>
+<b>Result:</b> 
+		The number of sources the entity contains, or 0 if an
+					error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIEntityGetSource"></a>
+<h3><a name="MIDIEntityGetSource">MIDIEntityGetSource</a></h3>
+
+		Return one of a given entity's sources.
+	
+		<pre><a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a> <b>MIDIEntityGetSource</b>(
+  <a href="../Reference/MIDIServices.html#MIDIEntityRef">MIDIEntityRef</a>  entity,
+  ItemCount      sourceIndex0
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>entity</tt></dt>
+<dd>
+						The entity being queried.
+		</dd>
+<dt><tt>sourceIndex0</tt></dt>
+<dd>
+						The index (0...<a href="../Reference/MIDIServices.html#MIDIEntityGetNumberOfSources"><tt>MIDIEntityGetNumberOfSources</tt></a>(entity)-1) of
+						the source to return
+		</dd>
+</dl>
+<b>Result:</b> 
+		A reference to a source, or NULL if an error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIEntityGetNumberOfDestinations"></a>
+<h3><a name="MIDIEntityGetNumberOfDestinations">MIDIEntityGetNumberOfDestinations</a></h3>
+
+		Return the number of destinations in a given entity.
+	
+		<pre>ItemCount <b>MIDIEntityGetNumberOfDestinations</b>(
+  <a href="../Reference/MIDIServices.html#MIDIEntityRef">MIDIEntityRef</a>  entity
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>entity</tt></dt>
+<dd>
+	The entity being queried
+		</dd>
+</dl>
+<b>Result:</b> 
+		The number of destinations the entity contains, or 0
+					if an error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIEntityGetDestination"></a>
+<h3><a name="MIDIEntityGetDestination">MIDIEntityGetDestination</a></h3>
+
+		Return one of a given entity's destinations.
+	
+		<pre><a href="../Reference/MIDIServices.html#MIDIEndpointRef">MIDIEndpointRef</a> <b>MIDIEntityGetDestination</b>(
+  <a href="../Reference/MIDIServices.html#MIDIEntityRef">MIDIEntityRef</a>  entity,
+  ItemCount      destIndex0
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>entity</tt></dt>
+<dd>
+						The entity being queried.
+		</dd>
+<dt><tt>destIndex0</tt></dt>
+<dd>
+						The index (0...<a href="../Reference/MIDIServices.html#MIDIEntityGetNumberOfDestinations"><tt>MIDIEntityGetNumberOfDestinations</tt></a>(entity)
+						- 1) of the destination to return
+		</dd>
+</dl>
+<b>Result:</b> 
+		A reference to a destination, or NULL if an error occurred.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIPacketNext"></a>
+<h3><a name="MIDIPacketNext">MIDIPacketNext</a></h3>
+
+		Advance a <a href="../Reference/MIDIServices.html#MIDIPacket"><tt>MIDIPacket</tt></a> pointer to the <a href="../Reference/MIDIServices.html#MIDIPacket"><tt>MIDIPacket</tt></a> which
+					immediately follows it in memory if it is part of a
+					<a href="../Reference/MIDIServices.html#MIDIPacketList"><tt>MIDIPacketList</tt></a>.
+	
+		<pre>#define MIDIPacketNext(pkt)  ((<a href="../Reference/MIDIServices.html#MIDIPacket">MIDIPacket</a> *)&(pkt)->data[(pkt)->length])</pre>
+	
+		This is implemented as a macro for efficiency and to avoid
+					const problems.
+	<h4>Parameters</h4>
+<dl><dt><tt>pkt</tt></dt>
+<dd>
+						A pointer to a <a href="../Reference/MIDIServices.html#MIDIPacket"><tt>MIDIPacket</tt></a> in a <a href="../Reference/MIDIServices.html#MIDIPacketList"><tt>MIDIPacketList</tt></a>.
+		</dd>
+</dl>
+<b>Result:</b> 
+		The subsequent packet.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIPacketListInit"></a>
+<h3><a name="MIDIPacketListInit">MIDIPacketListInit</a></h3>
+
+		Prepare a <a href="../Reference/MIDIServices.html#MIDIPacketList"><tt>MIDIPacketList</tt></a> to be built up dynamically.
+	
+		<pre><a href="../Reference/MIDIServices.html#MIDIPacket">MIDIPacket</a> * <b>MIDIPacketListInit</b>(
+  <a href="../Reference/MIDIServices.html#MIDIPacketList">MIDIPacketList</a> *  pktlist
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>pktlist</tt></dt>
+<dd>
+						The packet list to be initialized.
+		</dd>
+</dl>
+<b>Result:</b> 
+		A pointer to the first <a href="../Reference/MIDIServices.html#MIDIPacket"><tt>MIDIPacket</tt></a> in the packet list.
+	<hr>
+
+<a name="//apple_ref/c/func/MIDIPacketListAdd"></a>
+<h3><a name="MIDIPacketListAdd">MIDIPacketListAdd</a></h3>
+
+		Add a MIDI event to a <a href="../Reference/MIDIServices.html#MIDIPacketList"><tt>MIDIPacketList</tt></a>.
+	
+		<pre><a href="../Reference/MIDIServices.html#MIDIPacket">MIDIPacket</a> * <b>MIDIPacketListAdd</b>(
+  <a href="../Reference/MIDIServices.html#MIDIPacketList">MIDIPacketList</a> *  pktlist,
+  ByteCount         listSize,
+  <a href="../Reference/MIDIServices.html#MIDIPacket">MIDIPacket</a> *      curPacket,
+  <a href="../Reference/MIDIServices.html#MIDITimeStamp">MIDITimeStamp</a>     time,
+  ByteCount         nData,
+  const Byte *      data
+);</pre>
+	
+		
+	<h4>Parameters</h4>
+<dl><dt><tt>pktlist</tt></dt>
+<dd>
+						The packet list to which the event is to be added.
+		</dd>
+<dt><tt>listSize</tt></dt>
+<dd>
+						The size, in bytes, of the packet list.
+		</dd>
+<dt><tt>curPacket</tt></dt>
+<dd>
+						A packet pointer returned by a previous call to
+						<a href="../Reference/MIDIServices.html#MIDIPacketListInit"><tt>MIDIPacketListInit</tt></a> or <tt>MIDIPacketListAdd</tt> for this packet
+						list.
+		</dd>
+<dt><tt>time</tt></dt>
+<dd>
+						The new event's time.
+		</dd>
+<dt><tt>nData</tt></dt>
+<dd>
+						The length of the new event, in bytes.
+		</dd>
+<dt><tt>data</tt></dt>
+<dd>
+						The new event.  May be a single MIDI event, or a partial
+						sys-ex event.  Running status is <b>not</b> permitted.
+		</dd>
+</dl>
+<b>Result:</b> 
+		Returns null if there was not room in the packet for the
+					event; otherwise returns a packet pointer which should be
+					passed as curPacket in a subsequent call to this function.
+	<hr>
+
+<a name="//apple_ref/c/tag/MIDIObjectAddRemoveNotification"></a>
+<h3><a name="MIDIObjectAddRemoveNotification">MIDIObjectAddRemoveNotification</a></h3>
+
+		<pre>struct MIDIObjectAddRemoveNotification {
+  <a href="../Reference/MIDIServices.html#MIDINotificationMessageID">MIDINotificationMessageID</a>  messageID;
+  ByteCount                  messageSize;
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>              parent;
+  <a href="../Reference/MIDIServices.html#MIDIObjectType">MIDIObjectType</a>             parentType;
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>              child;
+  <a href="../Reference/MIDIServices.html#MIDIObjectType">MIDIObjectType</a>             childType;
+};</pre>
+	
+		
+	<h4>Fields</h4>
+<dl>
+<dt><tt>messageID</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>messageSize</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>parent</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>parentType</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>child</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>childType</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+
+<hr>
+
+<a name="//apple_ref/c/tag/MIDIObjectPropertyChangeNotification"></a>
+<h3><a name="MIDIObjectPropertyChangeNotification">MIDIObjectPropertyChangeNotification</a></h3>
+
+		<pre>struct MIDIObjectPropertyChangeNotification {
+  <a href="../Reference/MIDIServices.html#MIDINotificationMessageID">MIDINotificationMessageID</a>  messageID;
+  ByteCount                  messageSize;
+  <a href="../Reference/MIDIServices.html#MIDIObjectRef">MIDIObjectRef</a>              object;
+  <a href="../Reference/MIDIServices.html#MIDIObjectType">MIDIObjectType</a>             objectType;
+  CFStringRef                propertyName;
+};</pre>
+	
+		
+	<h4>Fields</h4>
+<dl>
+<dt><tt>messageID</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>messageSize</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>object</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>objectType</tt></dt>
+<dd>
+				
+		</dd>
+<dt><tt>propertyName</tt></dt>
+<dd>
+				
+		</dd>
+</dl>
+
+<hr>
+
+<a name="//apple_ref/c/tag/MIDIObjectType"></a>
+<h3><a name="MIDIObjectType">MIDIObjectType</a></h3>
+
+		<pre>typedef SInt32 <b>MIDIObjectType</b>;</pre>
+
+		<pre>enum {
+  kMIDIObjectType_Other                = -1,
+  kMIDIObjectType_Device               = 0,
+  kMIDIObjectType_Entity               = 1,
+  kMIDIObjectType_Source               = 2,
+  kMIDIObjectType_Destination          = 3,
+  kMIDIObjectType_ExternalMask         = 0x10,
+  kMIDIObjectType_ExternalDevice       = kMIDIObjectType_ExternalMask | kMIDIObjectType_Device,
+  kMIDIObjectType_ExternalEntity       = kMIDIObjectType_ExternalMask | kMIDIObjectType_Entity,
+  kMIDIObjectType_ExternalSource       = kMIDIObjectType_ExternalMask | kMIDIObjectType_Source,
+  kMIDIObjectType_ExternalDestination  = kMIDIObjectType_ExternalMask | kMIDIObjectType_Destination
+};</pre>
+	
+		Provides information about the actual type of a <a href="../Reference/MIDIServices.html#MIDIObjectRef"><tt>MIDIObjectRef</tt></a>.
+	<h4>Constants</h4>
+<dl>
+<dt><a name="//apple_ref/c/econst/kMIDIObjectType_Other"><tt>kMIDIObjectType_Other</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIObjectType_Device"><tt>kMIDIObjectType_Device</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIObjectType_Entity"><tt>kMIDIObjectType_Entity</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIObjectType_Source"><tt>kMIDIObjectType_Source</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIObjectType_Destination"><tt>kMIDIObjectType_Destination</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIObjectType_ExternalMask"><tt>kMIDIObjectType_ExternalMask</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIObjectType_ExternalDevice"><tt>kMIDIObjectType_ExternalDevice</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIObjectType_ExternalEntity"><tt>kMIDIObjectType_ExternalEntity</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIObjectType_ExternalSource"><tt>kMIDIObjectType_ExternalSource</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIObjectType_ExternalDestination"><tt>kMIDIObjectType_ExternalDestination</tt></a></dt>
+<dd>
+				
+		</dd>
+</dl><hr>
+
+<a name="//apple_ref/c/tag/Error codes"></a>
+<h3><a name="Errorcodes">Error codes</a></h3>
+
+		<pre>enum {
+  kMIDIInvalidClient      = -10830,
+  kMIDIInvalidPort        = -10831,
+  kMIDIWrongEndpointType  = -10832,
+  kMIDINoConnection       = -10833,
+  kMIDIUnknownEndpoint    = -10834,
+  kMIDIUnknownProperty    = -10835,
+  kMIDIWrongPropertyType  = -10836,
+  kMIDINoCurrentSetup     = -10837,
+  kMIDIMessageSendErr     = -10838,
+  kMIDIServerStartErr     = -10839,
+  kMIDISetupFormatErr     = -10840,
+  kMIDIWrongThread        = -10841,
+  kMIDIObjectNotFound     = -10842,
+  kMIDIIDNotUnique        = -10843
+};</pre>
+	
+		
+	<h4>Constants</h4>
+<dl>
+<dt><a name="//apple_ref/c/econst/kMIDIInvalidClient"><tt>kMIDIInvalidClient</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIInvalidPort"><tt>kMIDIInvalidPort</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIWrongEndpointType"><tt>kMIDIWrongEndpointType</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDINoConnection"><tt>kMIDINoConnection</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIUnknownEndpoint"><tt>kMIDIUnknownEndpoint</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIUnknownProperty"><tt>kMIDIUnknownProperty</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIWrongPropertyType"><tt>kMIDIWrongPropertyType</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDINoCurrentSetup"><tt>kMIDINoCurrentSetup</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIMessageSendErr"><tt>kMIDIMessageSendErr</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIServerStartErr"><tt>kMIDIServerStartErr</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDISetupFormatErr"><tt>kMIDISetupFormatErr</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIWrongThread"><tt>kMIDIWrongThread</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIObjectNotFound"><tt>kMIDIObjectNotFound</tt></a></dt>
+<dd>
+				
+		</dd>
+<dt><a name="//apple_ref/c/econst/kMIDIIDNotUnique"><tt>kMIDIIDNotUnique</tt></a></dt>
+<dd>
+				
+		</dd>
+</dl><hr>
+
+</body>
+</html>
